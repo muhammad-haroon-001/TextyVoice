@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('tool_slug');
             $table->string('meta_title')->nullable();
             $table->longText('meta_description')->nullable();
-            $table->bigInteger('language_id');
+            $table->string('language');
             $table->boolean('is_home')->default(0);
-            $table->string('parent')->nullable();
+            $table->bigInteger('parent_id');
             $table->json('content_keys')->nullable();
             $table->softDeletes();
             $table->timestamps();

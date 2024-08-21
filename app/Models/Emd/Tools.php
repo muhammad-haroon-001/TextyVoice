@@ -7,8 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tools extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'emd_tools';
-    protected $fillable = ['tool_name', 'tool_slug', 'meta_title', 'meta_description', 'language_id', 'is_home', 'parent', 'content_keys'];
+  protected $casts = [
+    'content_keys' => 'array',
+  ];
+
+  protected $fillable = [
+    'tool_name',
+    'tool_slug',
+    'meta_title',
+    'meta_description',
+    'language',
+    'is_home',
+    'parent_id',
+    'content_keys'
+  ];
+
+  public function parent()
+  {
+    return $this->belongsTo(Tools::class, 'parent_id');
+  }
 }
