@@ -41,19 +41,21 @@ class ToolsController extends Controller
       'tool-parent' => 'nullable|integer',
       'contentKey' => 'array',
       'contentValue' => 'array',
+      'contentType' => 'array',
     ]);
 
     info('Data:', $validatedData);
 
 
     $contentData = [];
-    if (isset($validatedData['contentKey']) && isset($validatedData['contentValue'])) {
-        foreach ($validatedData['contentKey'] as $index => $key) {
-            if (isset($validatedData['contentValue'][$index])) {
-                $contentData[$key] = $validatedData['contentValue'][$index];
-            }
-        }
-    }
+    foreach ($validatedData['contentKey'] as $index => $key) {
+      if (isset($validatedData['contentValue'][$index]) && isset($validatedData['contentType'][$index])) {
+          $contentData[$key] = [
+              'type' => $validatedData['contentType'][$index],
+              'value' => $validatedData['contentValue'][$index],
+          ];
+      }
+  }
 
     $jsonContent = json_encode($contentData);
 

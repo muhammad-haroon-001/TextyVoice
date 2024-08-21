@@ -43,7 +43,7 @@ $(document).ready(function () {
     var html =
       `<div class="row"><input type="hidden" value="` +
       selectedValue +
-      `" name="inputType[]">
+      `" name="contentType[]">
           <div class="col-md-3 mb-3">
               <input type="text" name="contentKey[]" class="form-control" placeholder="Key" value="">
           </div>
@@ -53,7 +53,7 @@ $(document).ready(function () {
     } else if (selectedValue == 'textarea') {
       html += `<textarea rows="3" name="contentValue[]" class="form-control" placeholder="Content" value=""></textarea>`;
     } else {
-      html += `<input class="form-control tool_textarea" name="contentValue[]"  />`;
+      html += `<input class="form-control tool_textarea" name="contentValue[]" />`;
     }
     html += `</div></div>`;
     $('.tool-content').append(html);
