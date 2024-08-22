@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dashboard\Analytics;
+
 use App\Http\Controllers\ToolsController;
 
 // Main Page Route
-Route::get('/dashboard', [Analytics::class, 'index'])->name('Emd.dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('Emd.dashboard');
 
 Route::prefix('emd')->group(function () {
   Route::get('tools', [ToolsController::class, 'index'])->name('Emd.tools');
