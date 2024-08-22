@@ -5,7 +5,7 @@ use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\ToolsController;
 
 // Main Page Route
-Route::get('/', [Analytics::class, 'index'])->name('dashboard-analytics');
+Route::get('/dashboard', [Analytics::class, 'index'])->name('Emd.dashboard');
 
 Route::prefix('emd')->group(function () {
   Route::get('tools', [ToolsController::class, 'index'])->name('Emd.tools');

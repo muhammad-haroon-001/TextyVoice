@@ -1,4 +1,90 @@
+@extends('layouts/dashboard')
+
 @php
+    /* Display elements */
+    $contentNavbar = true;
+    $containerNav = $containerNav ?? 'container-xxl';
+    $isNavbar = $isNavbar ?? true;
+    $isMenu = $isMenu ?? true;
+    $isFlex = $isFlex ?? false;
+    $isFooter = $isFooter ?? true;
+
+    /* HTML Classes */
+    $navbarDetached = 'navbar-detached';
+
+    /* Content classes */
+    $container = $container ?? 'container-xxl';
+
+@endphp
+
+@section('Content')
+    <div class="layout-wrapper layout-content-navbar {{ $isMenu ? '' : 'layout-without-menu' }}">
+        <div class="layout-container">
+                <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+                    <!-- ! Hide app brand if navbar-full -->
+                    <div class="app-brand demo">
+                        <a href="{{ url('/') }}" class="app-brand-link">
+                            <span class="app-brand-logo demo me-1">
+
+                            </span>
+                            <span
+                                class="app-brand-text demo menu-text fw-semibold ms-2">{{ config('variables.templateName') }}</span>
+                        </a>
+
+                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                            <i class="mdi menu-toggle-icon d-xl-block align-middle mdi-20px"></i>
+                        </a>
+                    </div>
+
+                    <div class="menu-inner-shadow"></div>
+
+                    <ul class="menu-inner py-1">
+
+                        {{-- main menu --}}
+                        <li class="menu-item active">
+                            <a href="{{route('Emd.dashboard')}}" class="menu-link">
+                                <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                                <div>Dashboard</div>
+
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
+                                <div>Tools</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div>Parent List</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('Emd.tools') }}" class="menu-link">
+                                        <div>List</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('Emd.tools.create') }}" class="menu-link">
+                                        <div>Add</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div>Trash</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+
+
+            <!-- Layout page -->
+            <div class="layout-page">
+                <!-- BEGIN: Navbar-->
+                @php
 $containerNav = $containerNav ?? 'container-fluid';
 $navbarDetached = ($navbarDetached ?? '');
 
@@ -120,3 +206,43 @@ $navbarDetached = ($navbarDetached ?? '');
     @endif
   </nav>
   <!-- / Navbar -->
+
+                <!-- END: Navbar-->
+
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+
+                    <!-- Content -->
+                    @if ($isFlex)
+                        <div class="{{ $container }} d-flex align-items-stretch flex-grow-1 p-0">
+                        @else
+                            <div class="{{ $container }} flex-grow-1 container-p-y">
+                    @endif
+
+                    @yield('content')
+
+                </div>
+                <!-- / Content -->
+
+                <!-- Footer -->
+                @if ($isFooter)
+                    @include('layouts/admin/footer/footer')
+                @endif
+                <!-- / Footer -->
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!--/ Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    @if ($isMenu)
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    @endif
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+@endsection

@@ -19,23 +19,23 @@
 
 
   <!-- Include Styles -->
-  @include('layouts/sections/styles')
+  @include('layouts/admin/styles')
 
   <!-- Include Scripts for customizer, helper, analytics, config -->
-  @include('layouts/sections/scriptsIncludes')
+  @include('layouts/admin/scriptsIncludes')
 </head>
 
 <body>
 
 
   <!-- Layout Content -->
-  @yield('layoutContent')
+  @yield('Content')
   <!--/ Layout Content -->
 
 
 
   <!-- Include Scripts -->
-  @include('layouts/sections/scripts')
+  @include('layouts/admin/scripts')
 
 </body>
 
