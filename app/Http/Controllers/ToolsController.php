@@ -61,21 +61,22 @@ class ToolsController extends Controller
     }
     $jsonContent = json_encode($contentData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 
-    $directoryPath = resource_path('views/frontend/emd_tool_pages/');
-    if (!FacadesFile::exists($directoryPath)) {
-      FacadesFile::makeDirectory($directoryPath, 0755, true);
-      info('Directory created: ' . $directoryPath);
-    } else {
-      info('Directory already exists: ' . $directoryPath);
-    }
-
-    $filePath = $directoryPath . $validatedData['slug'] . '.blade.php';
-    info('Attempting to create file at: ' . $filePath);
-    if (!FacadesFile::exists($filePath)) {
-      $result = FacadesFile::put($filePath, '@extends(\'main\')');
-      info('File creation result: ' . ($result !== false ? 'Success' : 'Failed'));
-    } else {
-      info('File already exists: ' . $filePath);
+    if (!$validatedData['is-home']) {
+      $directoryPath = resource_path('views/frontend/emd_tool_pages/');
+      if (!FacadesFile::exists($directoryPath)) {
+        FacadesFile::makeDirectory($directoryPath, 0755, true);
+        info('Directory created: ' . $directoryPath);
+      } else {
+        info('Directory already exists: ' . $directoryPath);
+      }
+      $filePath = $directoryPath . $validatedData['slug'] . '.blade.php';
+      info('Attempting to create file at: ' . $filePath);
+      if (!FacadesFile::exists($filePath)) {
+        $result = FacadesFile::put($filePath, '@extends(\'main\')');
+        info('File creation result: ' . ($result !== false ? 'Success' : 'Failed'));
+      } else {
+        info('File already exists: ' . $filePath);
+      }
     }
 
     $tool = Tools::create([
