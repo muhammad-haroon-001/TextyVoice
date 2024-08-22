@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Emd\Tools;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File as FacadesFile;
 
 class ToolsController extends Controller
 {
@@ -46,18 +48,35 @@ class ToolsController extends Controller
 
     info('Data:', $validatedData);
 
-
     $contentData = [];
-    foreach ($validatedData['contentKey'] as $index => $key) {
+    $totalItems = count($validatedData['contentKey']);
+    for ($index = 0; $index < $totalItems; $index++) {
       if (isset($validatedData['contentValue'][$index]) && isset($validatedData['contentType'][$index])) {
-          $contentData[$key] = [
-              'type' => $validatedData['contentType'][$index],
-              'value' => $validatedData['contentValue'][$index],
-          ];
+        $key = $validatedData['contentKey'][$index];
+        $contentData[$key] = [
+          'type' => $validatedData['contentType'][$index],
+          'value' => $validatedData['contentValue'][$index],
+        ];
       }
-  }
+    }
+    $jsonContent = json_encode($contentData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 
-    $jsonContent = json_encode($contentData);
+    $directoryPath = resource_path('views/frontend/emd_tool_pages/');
+    if (!FacadesFile::exists($directoryPath)) {
+      FacadesFile::makeDirectory($directoryPath, 0755, true);
+      info('Directory created: ' . $directoryPath);
+    } else {
+      info('Directory already exists: ' . $directoryPath);
+    }
+
+    $filePath = $directoryPath . $validatedData['slug'] . '.blade.php';
+    info('Attempting to create file at: ' . $filePath);
+    if (!FacadesFile::exists($filePath)) {
+      $result = FacadesFile::put($filePath, '@extends(\'main\')');
+      info('File creation result: ' . ($result !== false ? 'Success' : 'Failed'));
+    } else {
+      info('File already exists: ' . $filePath);
+    }
 
     $tool = Tools::create([
       'tool_name' => $validatedData['name'],
@@ -67,9 +86,8 @@ class ToolsController extends Controller
       'language' => $validatedData['tool-lang'],
       'is_home' => $validatedData['is-home'] ?? 0,
       'parent_id' => $validatedData['tool-parent'],
-      'content_keys' => $jsonContent
+      'content_keys' => $jsonContent,
     ]);
-
 
     if ($tool) {
       return redirect()->route('Emd.tools')->with('success', 'Tool created successfully');
@@ -77,4 +95,6 @@ class ToolsController extends Controller
 
     return redirect()->route('Emd.tools')->with('error', 'Tool not created');
   }
+
+
 }

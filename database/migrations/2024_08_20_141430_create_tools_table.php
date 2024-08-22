@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('language');
             $table->boolean('is_home')->default(0);
             $table->bigInteger('parent_id');
-            $table->json('content_keys')->nullable();
+            $table->longText('content_keys')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
