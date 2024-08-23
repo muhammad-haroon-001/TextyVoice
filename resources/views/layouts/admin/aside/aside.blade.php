@@ -49,7 +49,7 @@
                   </a>
               </li>
               <li class="menu-item">
-                  <a href="#" class="menu-link">
+                  <a href="{{ route('Emd.tools.trash') }}" class="menu-link">
                       <div>Trash</div>
                   </a>
               </li>

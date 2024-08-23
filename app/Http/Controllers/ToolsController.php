@@ -13,7 +13,16 @@ class ToolsController extends Controller
 
   public function index()
   {
-    return view('admin.tools.index');
+    $tools = Tools::with('parent')
+      ->select('id', 'tool_name', 'tool_slug', 'parent_id', 'language', 'is_home')
+      ->where('deleted_at', null)
+      ->get();
+
+    $params = [
+      'tools' => $tools
+    ];
+
+    return view('admin.tools.index', $params);
   }
 
   public function create(Request $request)
@@ -22,7 +31,6 @@ class ToolsController extends Controller
     $languageData = json_decode($jsonData, true);
 
     $tools = Tools::get();
-    // dd($tools);
     $params = [
       'tools' => $tools,
       'languageData' => $languageData
@@ -36,7 +44,7 @@ class ToolsController extends Controller
     $validatedData = $request->validate([
       'name' => 'required|string|max:255',
       'slug' => 'required|string|max:255',
-      'is-home' => 'boolean',
+      'is-home' => 'boolean|default:0',
       'meta-title' => 'nullable|string|max:255',
       'meta-description' => 'nullable|string',
       'tool-lang' => 'required|string|max:10',
@@ -60,8 +68,8 @@ class ToolsController extends Controller
       }
     }
     $jsonContent = json_encode($contentData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-
-    if (!$validatedData['is-home']) {
+    $isHome = $validatedData['is_home'] ?? 0;
+    if (!$isHome) {
       $directoryPath = resource_path('views/frontend/emd_tool_pages/');
       if (!FacadesFile::exists($directoryPath)) {
         FacadesFile::makeDirectory($directoryPath, 0755, true);
@@ -85,7 +93,7 @@ class ToolsController extends Controller
       'meta_title' => $validatedData['meta-title'],
       'meta_description' => $validatedData['meta-description'],
       'language' => $validatedData['tool-lang'],
-      'is_home' => $validatedData['is-home'] ?? 0,
+      'is_home' => $isHome,
       'parent_id' => $validatedData['tool-parent'],
       'content_keys' => $jsonContent,
     ]);
@@ -97,5 +105,33 @@ class ToolsController extends Controller
     return redirect()->route('Emd.tools')->with('error', 'Tool not created');
   }
 
+
+  public function destroy($id)
+  {
+    $tool = Tools::findOrFail($id);
+    $tool->delete();
+
+    return redirect()->route('Emd.tools')->with('success', 'Tool deleted successfully');
+  }
+
+
+  public function edit($slug)
+  {
+    $tool = Tools::findOrFail($slug);
+    $jsonData = file_get_contents(base_path('./resources/languages/languages.json'));
+    $languageData = json_decode($jsonData, true);
+
+  }
+
+
+  public function trash_tools(Request $request)
+  {
+    // get soft delte data
+    $tools = Tools::onlyTrashed()->get();
+    $params = [
+        'tools' => $tools,
+    ];
+    return view('admin.tools.trash', $params);
+  }
 
 }

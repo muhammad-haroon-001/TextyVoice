@@ -59,4 +59,7 @@ $(document).ready(function () {
     $('.tool-content').append(html);
     init_tinymce();
   });
+
+
+ 
 });
