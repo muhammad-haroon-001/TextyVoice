@@ -41,10 +41,13 @@ class ToolsController extends Controller
 
   public function store(Request $request)
   {
+    $request->merge([
+      'is-home' => $request->has('is-home') ? 1 : 0,
+  ]);
     $validatedData = $request->validate([
       'name' => 'required|string|max:255',
       'slug' => 'required|string|max:255',
-      'is-home' => 'boolean|default:0',
+      'is-home' => 'boolean',
       'meta-title' => 'nullable|string|max:255',
       'meta-description' => 'nullable|string',
       'tool-lang' => 'required|string|max:10',
@@ -53,6 +56,8 @@ class ToolsController extends Controller
       'contentValue' => 'array',
       'contentType' => 'array',
     ]);
+
+
 
     info('Data:', $validatedData);
 
@@ -68,7 +73,7 @@ class ToolsController extends Controller
       }
     }
     $jsonContent = json_encode($contentData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-    $isHome = $validatedData['is_home'] ?? 0;
+    $isHome = $validatedData['is-home'] ?? 0;
     if (!$isHome) {
       $directoryPath = resource_path('views/frontend/emd_tool_pages/');
       if (!FacadesFile::exists($directoryPath)) {
@@ -117,9 +122,15 @@ class ToolsController extends Controller
 
   public function edit($slug)
   {
-    $tool = Tools::findOrFail($slug);
+    $tool = Tools::where('tool_slug', $slug)->first();
     $jsonData = file_get_contents(base_path('./resources/languages/languages.json'));
     $languageData = json_decode($jsonData, true);
+
+    $params = [
+      'tool' => $tool,
+      'languageData' => $languageData
+    ];
+    return view('admin.tools.edit', $params);
 
   }
 
@@ -133,5 +144,15 @@ class ToolsController extends Controller
     ];
     return view('admin.tools.trash', $params);
   }
+
+
+  public function restore_tool($id)
+  {
+    $tool = Tools::onlyTrashed()->findOrFail($id);
+    $tool->restore();
+    return redirect()->route('Emd.tools')->with('success', 'Tool restored successfully');
+  }
+
+
 
 }

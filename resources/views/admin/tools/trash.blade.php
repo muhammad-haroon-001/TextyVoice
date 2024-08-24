@@ -57,8 +57,12 @@
                     data: null,
                     title: 'Actions',
                     render: function(data, type, row) {
-
-                        return '<a href="javascript:void(0)" class="restore-tool btn btn-primary" data-tool_id="' + data.id + '" >Restore</a>'
+                        var restoreUrl = `/emd/restore-tool/${data.id}`;
+                        return '<form action="' + restoreUrl + '" method="POST">' +
+                            '<input type="hidden" name="_method" value="PUT">' +
+                            '@csrf' +
+                            '<button type="submit" class="restore-tool btn btn-primary" data-tool_id="' + data.id + '" >Restore</button>' +
+                            '</form>';
                     }}
             ]
 
