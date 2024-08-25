@@ -16,4 +16,5 @@ Route::prefix('emd')->group(function () {
   Route::get('trash-tools', [ToolsController::class,'trash_tools'])->name('Emd.tools.trash');
   Route::put('restore-tool/{id}', [ToolsController::class,'restore_tool'])->name('Emd.tools.restore');
   Route::get('edit-tool/{slug}', [ToolsController::class,'edit'])->name('Emd.tools.edit');
+  Route::put('update-tool/{id}', [ToolsController::class,'update'])->name('Emd.tools.update');
 });
