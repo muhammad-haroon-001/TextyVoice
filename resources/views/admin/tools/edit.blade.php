@@ -174,25 +174,26 @@
 
                                                 </div>
                                             @endforeach
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <select name="add_more_type" id="add_more_type" class="form-select">
-                                                        <option selected disabled>Select Input Type
-                                                        </option>
-                                                        <option value="inputField">Input Fields
-                                                        </option>
-                                                        <option value="textarea">Text Area
-                                                        </option>
-                                                        <option value="richText">Rich Text Editor
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <a href="#" class="btn btn-primary waves-effect waves-light"
-                                                        id="addMore">Add Row</a>
-                                                </div>
-                                            </div>
+
                                         </div>
+                                        <div class="row">
+                                          <div class="col-md-6 mb-3">
+                                              <select name="add_more_type" id="add_more_type" class="form-select">
+                                                  <option selected disabled>Select Input Type
+                                                  </option>
+                                                  <option value="inputField">Input Fields
+                                                  </option>
+                                                  <option value="textarea">Text Area
+                                                  </option>
+                                                  <option value="richText">Rich Text Editor
+                                                  </option>
+                                              </select>
+                                          </div>
+                                          <div class="col-md-6 mb-3">
+                                              <a href="#" class="btn btn-primary waves-effect waves-light"
+                                                  id="addMore">Add Row</a>
+                                          </div>
+                                      </div>
                                 </div>
 
 
