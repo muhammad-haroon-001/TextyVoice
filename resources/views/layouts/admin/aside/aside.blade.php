@@ -7,7 +7,7 @@
 
           </span>
           <span
-              class="app-brand-text demo menu-text fw-semibold ms-2">{{ config('variables.templateName') }}</span>
+              class="app-brand-text demo menu-text fw-semibold ms-2">EMD V1</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -34,7 +34,7 @@
           </a>
           <ul class="menu-sub">
               <li class="menu-item">
-                  <a href="" class="menu-link">
+                  <a href="#" class="menu-link">
                       <div>Parent List</div>
                   </a>
               </li>
@@ -50,6 +50,25 @@
               </li>
               <li class="menu-item">
                   <a href="{{ route('Emd.tools.trash') }}" class="menu-link">
+                      <div>Trash</div>
+                  </a>
+              </li>
+          </ul>
+      </li>
+      <li class="menu-item">
+          <a href="#" class="menu-link menu-toggle">
+           {{-- need icon for blog --}}
+              <i class="menu-icon tf-icons mdi mdi-book"></i>
+              <div>Blog</div>
+          </a>
+          <ul class="menu-sub">
+              <li class="menu-item">
+                  <a href="" class="menu-link">
+                      <div>List/Add</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="" class="menu-link">
                       <div>Trash</div>
                   </a>
               </li>
