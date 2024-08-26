@@ -202,31 +202,26 @@ class ToolsController extends Controller
 
   public function download_content_file($id)
   {
-      $tool = Tools::findOrFail($id);
-      $content = $tool->content_keys;
-      $tempFile = tempnam(sys_get_temp_dir(), $tool->tool_slug);
-      file_put_contents($tempFile, $content);
-      $filename = $tool->tool_slug . '.json';
-      return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
+    $tool = Tools::findOrFail($id);
+    $content = $tool->content_keys;
+    $tempFile = tempnam(sys_get_temp_dir(), $tool->tool_slug);
+    file_put_contents($tempFile, $content);
+    $filename = $tool->tool_slug . '.json';
+    return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
   }
 
 
   public function upload_content_file(Request $request, $id)
   {
-    try{
+    try {
       $tool = Tools::findOrFail($id);
-
-      // Validate the uploaded file
-     $request->validate([
-          'content' => 'required|file|mimes:json',  // Ensure it's a file and has the correct mime type
+      $request->validate([
+        'content' => 'required|file|mimes:json',
       ]);
-
-      // Read the content of the uploaded file
       $fileContent = file_get_contents($request->file('content')->getRealPath());
 
-      // Update the tool with the new content
       $tool->update([
-          'content_keys' => $fileContent,
+        'content_keys' => $fileContent,
       ]);
 
       return redirect()->back()->with('success', 'Tool content updated successfully');
