@@ -17,4 +17,6 @@ Route::prefix('emd')->group(function () {
   Route::put('restore-tool/{id}', [ToolsController::class,'restore_tool'])->name('Emd.tools.restore');
   Route::get('edit-tool/{slug}', [ToolsController::class,'edit'])->name('Emd.tools.edit');
   Route::put('update-tool/{id}', [ToolsController::class,'update'])->name('Emd.tools.update');
+  Route::get('download-content/{id}', [ToolsController::class,'download_content_file'])->name('Emd.tools.download');
+  Route::post('upload-content/{id}', [ToolsController::class,'upload_content_file'])->name('Emd.tools.upload');
 });

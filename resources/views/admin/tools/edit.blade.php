@@ -82,7 +82,8 @@
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="language" class="form-label">Language</label>
-                                            <input type="text" class="form-control" id="language" name="tool-lang" readonly value="{{ $tool->language }}">
+                                            <input type="text" class="form-control" id="language" name="tool-lang"
+                                                readonly value="{{ $tool->language }}">
                                         </div>
                                     </div>
 
@@ -152,7 +153,8 @@
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <button type="button"
-                                                            class="btn btn-danger d-inline cross delete_content_key">Delete</button>
+                                                            class="btn btn-danger d-inline cross delete_content_key"><i
+                                                                class="mdi mdi-delete"></i></button>
                                                     </div>
 
                                                 </div>
@@ -187,7 +189,29 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="white-bg mt-5">
+                <div class="row">
+                    <div class="col-6 text-center pt-5">
+                        <h4>Download Content as JSON File</h4>
+                        <a href="{{ route('Emd.tools.download', $tool->id) }}"
+                            class="btn btn-primary waves-effect waves-light">Download .json file</a>
+                        <p class="px-5 mt-3">
+                            To use this conetnt just open the downloded file and copy the content in it and paste that
+                            content on right form and click on "Upload JSON" button
+                        </p>
+                    </div>
+                    <div class="col-6 text-center pt-5">
+                        <div class="message"></div>
+                        <h4>Upload JSON Content</h4>
+                        <form action="{{ route('Emd.tools.upload', $tool->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="content" id="content" class="form-control" required>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light mt-3">Upload JSON</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     @push('page-script')
@@ -291,7 +315,8 @@
                             `<input type="text" class="form-control tool_textarea" name="contentValue[]"  />`;
                     }
                     html += `</div><div class="col-sm-1">
-                                        <img class="cross" src="http://resumir.org/web_assets/admin/images/remove.png" alt="">
+                                        <button type="button"
+                                                            class="btn btn-danger d-inline cross delete_content_key"><i class="mdi mdi-delete"></i></button>
                                     </div></div>`;
                     $(".tool-content").append(html);
                     init_tinymce();

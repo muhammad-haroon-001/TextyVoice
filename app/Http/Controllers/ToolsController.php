@@ -7,6 +7,7 @@ use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File as FacadesFile;
+use Illuminate\Support\Facades\Storage;
 
 class ToolsController extends Controller
 {
@@ -199,6 +200,38 @@ class ToolsController extends Controller
     return redirect()->route('Emd.tools')->with('success', 'Tool restored successfully');
   }
 
+  public function download_content_file($id)
+  {
+      $tool = Tools::findOrFail($id);
+      $content = $tool->content_keys;
+      $tempFile = tempnam(sys_get_temp_dir(), $tool->tool_slug);
+      file_put_contents($tempFile, $content);
+      $filename = $tool->tool_slug . '.json';
+      return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
+  }
 
 
+  public function upload_content_file(Request $request, $id)
+  {
+    try{
+      $tool = Tools::findOrFail($id);
+
+      // Validate the uploaded file
+     $request->validate([
+          'content' => 'required|file|mimes:json',  // Ensure it's a file and has the correct mime type
+      ]);
+
+      // Read the content of the uploaded file
+      $fileContent = file_get_contents($request->file('content')->getRealPath());
+
+      // Update the tool with the new content
+      $tool->update([
+          'content_keys' => $fileContent,
+      ]);
+
+      return redirect()->back()->with('success', 'Tool content updated successfully');
+    } catch (\Throwable $th) {
+      info($th->getMessage());
+    }
+  }
 }
