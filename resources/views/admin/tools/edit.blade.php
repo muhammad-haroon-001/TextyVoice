@@ -44,16 +44,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Is it Home? -->
-                                    <div class="col-12">
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" value="1"
-                                                @if ($tool->is_home == 1) checked @endif name="is-home"
-                                                class="form-check-input" id="isHome">
-                                            <label class="form-check-label" for="isHome">Is it Home?</label>
-                                        </div>
-                                    </div>
-
                                     <!-- Meta Title -->
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
@@ -92,14 +82,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="language" class="form-label">Language</label>
-                                            <select class="form-select" name="tool-lang" aria-label="Languages" required>
-                                                <option disabled selected>Languages</option>
-                                                @foreach ($languageData['languages'] as $lang)
-                                                    <option value="{{ $lang['code'] }}">{{ $lang['name'] }}
-                                                        ({{ $lang['code'] }})
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" class="form-control" id="language" name="tool-lang" readonly value="{{ $tool->language }}">
                                         </div>
                                     </div>
 
@@ -107,7 +90,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="parentTool" class="form-label">Parent Tool</label>
-                                            <input type="text" readonly name="parent-tool"
+                                            <input type="text" readonly name="tool-parent"
                                                 value="@if ($tool->parent_id != 0) {{ $tool->parent->tool_name }} @endif Parent Tool"
                                                 class="form-control" id="parentTool">
                                         </div>
@@ -131,7 +114,7 @@
                                         <div class="tool-content ui_sortable" id="tool-content">
                                             @foreach ($contentKeys as $key => $content)
                                                 <div class="row tool_content_row" data-id="summarizer">
-                                                    <input type="hidden" name="inputType[]"
+                                                    <input type="hidden" name="contentType[]"
                                                         value="{{ $content['type'] }}" class="target_input_type">
                                                     <div class="col-md-2 mb-3">
                                                         <input type="text" name="contentKey[]" class="form-control"
@@ -169,7 +152,7 @@
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <button type="button"
-                                                            class="btn btn-danger d-inline delete_content_key">Delete</button>
+                                                            class="btn btn-danger d-inline cross delete_content_key">Delete</button>
                                                     </div>
 
                                                 </div>
@@ -177,29 +160,29 @@
 
                                         </div>
                                         <div class="row">
-                                          <div class="col-md-6 mb-3">
-                                              <select name="add_more_type" id="add_more_type" class="form-select">
-                                                  <option selected disabled>Select Input Type
-                                                  </option>
-                                                  <option value="inputField">Input Fields
-                                                  </option>
-                                                  <option value="textarea">Text Area
-                                                  </option>
-                                                  <option value="richText">Rich Text Editor
-                                                  </option>
-                                              </select>
-                                          </div>
-                                          <div class="col-md-6 mb-3">
-                                              <a href="#" class="btn btn-primary waves-effect waves-light"
-                                                  id="addMore">Add Row</a>
-                                          </div>
-                                      </div>
+                                            <div class="col-md-6 mb-3">
+                                                <select name="add_more_type" id="add_more_type" class="form-select">
+                                                    <option selected disabled>Select Input Type
+                                                    </option>
+                                                    <option value="inputField">Input Fields
+                                                    </option>
+                                                    <option value="textarea">Text Area
+                                                    </option>
+                                                    <option value="richText">Rich Text Editor
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <a href="#" class="btn btn-primary waves-effect waves-light"
+                                                    id="addMore">Add Row</a>
+                                            </div>
+                                        </div>
                                 </div>
 
 
                                 </span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>
                 </div>
@@ -292,7 +275,7 @@
                     e.preventDefault();
                     var selectedValue = $("#add_more_type").val();
                     var html = `<div class="row tool_content_row">
-                <input type="hidden" value="` + selectedValue + `" name="inputType[]" class="target_input_type">
+                <input type="hidden" value="` + selectedValue + `" name="contentType[]" class="target_input_type">
                     <div class="col-md-3 mb-3">
                         <input type="text" name="contentKey[]" class="form-control" placeholder="Key" value="">
                     </div>
@@ -395,8 +378,8 @@
                 parent.find(".input-value").html(html);
                 init_tinymce();
                 element.attr('data-original-type', val);
-                let inputType = parent.find('.target_input_type');
-                inputType.val(element.attr('data-original-type'));
+                let contentType = parent.find('.target_input_type');
+                contentType.val(element.attr('data-original-type'));
             }
         </script>
     @endpush
