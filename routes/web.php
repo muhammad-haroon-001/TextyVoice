@@ -7,4 +7,5 @@ use App\Http\Controllers\ToolsController;
 
 
 
-Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/{lang?}/{slug?}', [FrontendController::class, 'showToolBySlug'])
+    ->name('Emd.tools.get');

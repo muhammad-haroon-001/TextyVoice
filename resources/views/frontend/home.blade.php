@@ -3,7 +3,7 @@
 @section('content')
    <div class="container">
     <div class="bg-red py-5">
-        <h1>Home</h1>
+      {{$tool->tool_name}}
     </div>
    </div>
 @endsection

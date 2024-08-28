@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\dashboard\DashboardController;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ToolsController;
 
 // Main Page Route
@@ -20,3 +20,4 @@ Route::prefix('emd')->group(function () {
   Route::get('download-content/{id}', [ToolsController::class,'download_content_file'])->name('Emd.tools.download');
   Route::post('upload-content/{id}', [ToolsController::class,'upload_content_file'])->name('Emd.tools.upload');
 });
+// Route::get('/{slug?}', [FrontendController::class,'showToolBySlug'])->name('Emd.tools.get');

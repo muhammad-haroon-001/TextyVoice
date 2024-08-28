@@ -102,13 +102,13 @@
                                         <div class="col-12">
                                             <div class="my-5">
                                                 @php
-                                                    $contentKeys = json_decode($tool->content_keys, true);
+                                                    @$contentKeys = json_decode($tool->content_keys, true);
                                                     // count
                                                     // dd($contentKeys);
-                                                    $count = count($contentKeys);
+                                                    @$count = count($contentKeys);
 
                                                 @endphp
-                                                <h3>Content Keys: {{ $count }}</h3>
+                                                <h3>Content Keys: {{ $count > 0 ? $count : 0 }}</h3>
                                             </div>
                                         </div>
 
