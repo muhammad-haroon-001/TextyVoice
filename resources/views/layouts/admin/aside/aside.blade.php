@@ -59,6 +59,25 @@
           <a href="#" class="menu-link menu-toggle">
            {{-- need icon for blog --}}
               <i class="menu-icon tf-icons mdi mdi-book"></i>
+              <div>Custom Pages</div>
+          </a>
+          <ul class="menu-sub">
+              <li class="menu-item">
+                  <a href="{{ route('custom-page.create') }}" class="menu-link">
+                      <div>Add</div>
+                  </a>
+              </li>
+              <li class="menu-item">
+                  <a href="" class="menu-link">
+                      <div>Trash</div>
+                  </a>
+              </li>
+          </ul>
+      </li>
+      <li class="menu-item">
+          <a href="#" class="menu-link menu-toggle">
+           {{-- need icon for blog --}}
+              <i class="menu-icon tf-icons mdi mdi-book"></i>
               <div>Blog</div>
           </a>
           <ul class="menu-sub">

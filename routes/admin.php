@@ -1,14 +1,14 @@
 <?php
 
+use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolsController;
 
-// Main Page Route
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('Emd.dashboard');
 
 Route::prefix('emd')->group(function () {
+  Route::get('dashboard', [DashboardController::class, 'index'])->name('Emd.dashboard');
   Route::get('tools', [ToolsController::class, 'index'])->name('Emd.tools');
   Route::get('create-tools', [ToolsController::class, 'create'])->name('Emd.tools.create');
   Route::post('store-tools', [ToolsController::class, 'store'])->name('Emd.tools.store');
@@ -19,5 +19,5 @@ Route::prefix('emd')->group(function () {
   Route::put('update-tool/{id}', [ToolsController::class,'update'])->name('Emd.tools.update');
   Route::get('download-content/{id}', [ToolsController::class,'download_content_file'])->name('Emd.tools.download');
   Route::post('upload-content/{id}', [ToolsController::class,'upload_content_file'])->name('Emd.tools.upload');
+  Route::resource('custom-page', CustomPageController::class);
 });
-// Route::get('/{slug?}', [FrontendController::class,'showToolBySlug'])->name('Emd.tools.get');
