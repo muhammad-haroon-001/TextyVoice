@@ -7,6 +7,6 @@ use App\Http\Controllers\ToolsController;
 
 
 
-Route::get('/{slug?}', [FrontendController::class, 'showToolBySlug'])
-    ->where('slug', '[a-zA-Z0-9-]+') // Match valid slugs
-    ->name('Emd.tools.get');
+Route::get('/{slug?}', [FrontendController::class, 'showPageBySlug'])
+    ->where('slug', '[a-zA-Z0-9-]+')
+    ->name('page.get');
