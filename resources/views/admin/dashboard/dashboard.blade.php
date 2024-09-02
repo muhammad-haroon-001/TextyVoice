@@ -1,6 +1,6 @@
 @extends('layouts/adminLayout')
 
-@section('title', 'EMD')
+@section('title', 'Dashboard')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
