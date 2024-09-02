@@ -32,3 +32,12 @@ package-lock.log
 /public/assets/js
 /public/assets/css
 /public/assets/vendor
+
+# Ignore environment variables
+.env
+
+# Ignore node modules directory
+node_modules/
+
+# Ignore composer.lock file
+composer.lock
