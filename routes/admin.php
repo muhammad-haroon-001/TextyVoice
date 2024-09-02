@@ -20,4 +20,5 @@ Route::prefix('emd')->group(function () {
   Route::get('download-content/{id}', [ToolsController::class,'download_content_file'])->name('Emd.tools.download');
   Route::post('upload-content/{id}', [ToolsController::class,'upload_content_file'])->name('Emd.tools.upload');
   Route::resource('custom-page', CustomPageController::class);
+  Route::get('download-custom-page/{id}', [CustomPageController::class,'download_content_file'])->name('Emd.custom-page.download');
 });

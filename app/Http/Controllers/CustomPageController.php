@@ -125,7 +125,42 @@ class CustomPageController extends Controller
    */
   public function update(Request $request, CustomPage $customPage)
   {
-    //
+    $validatedData = $request->validate([
+      'name' => 'required|string|max:255',
+      'view' => 'required|string|max:255',
+      'slug' => 'required|string|max:255',
+      'key' => 'required|string|max:255',
+      'meta_title' => 'nullable|string|max:255',
+      'meta_description' => 'nullable|string',
+      'sitemap' => 'boolean',
+      'contentKey' => 'array',
+      'contentValue' => 'array',
+      'contentType' => 'array'
+    ]);
+    $contentData = [];
+    $totalItems = count($validatedData['contentKey']);
+    for ($index = 0; $index < $totalItems; $index++) {
+      if (isset($validatedData['contentValue'][$index]) && isset($validatedData['contentType'][$index])) {
+        $key = $validatedData['contentKey'][$index];
+        $contentData[$key] = [
+          'type' => $validatedData['contentType'][$index],
+          'value' => $validatedData['contentValue'][$index],
+        ];
+      }
+    }
+    $jsonContent = json_encode($contentData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    $isSitemap = $validatedData['sitemap'] ?? 0;
+    $customPage->update([
+      'name' => $validatedData['name'],
+      'blade_view' => $validatedData['view'],
+      'slug' => $validatedData['slug'],
+      'page_key' => $validatedData['key'],
+      'meta_title' => $validatedData['meta_title'],
+      'meta_description' => $validatedData['meta_description'],
+      'sitemap' => $isSitemap,
+      'content_keys' => $jsonContent
+    ]);
+    return redirect()->route('custom-page.index');
   }
 
   /**
@@ -135,5 +170,16 @@ class CustomPageController extends Controller
   {
     $customPage->delete();
     return redirect()->route('custom-page.index');
+  }
+
+
+  public function download_content_file($id)
+  {
+    $page = CustomPage::findOrFail($id);
+    $content = $page->content_keys;
+    $tempFile = tempnam(sys_get_temp_dir(), $page->slug);
+    file_put_contents($tempFile, $content);
+    $filename = $page->slug . '.json';
+    return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
   }
 }
