@@ -1,6 +1,6 @@
 @extends('layouts/adminLayout')
 
-@section('title', 'Tools')
+@section('title', 'Edit')
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}">
@@ -39,7 +39,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="bladeFile" class="form-label">Blade File</label>
-                                            <input type="text" name="view" value="{{ $page->blade_view }}"
+                                            <input type="text" name="view" value="{{ $page->blade_view }}" readonly
                                                 class="form-control" id="bladeFile" placeholder="Blade File Name">
                                         </div>
                                     </div>
@@ -57,7 +57,8 @@
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="pageKey" class="form-label">Page Key</label>
-                                            <input type="text" value="{{$page->page_key}}" name="key" class="form-control" placeholder="Page Key" id="pageKey">
+                                            <input type="text" value="{{ $page->page_key }}" name="key"
+                                                class="form-control" placeholder="Page Key" id="pageKey">
                                         </div>
                                     </div>
 
@@ -81,8 +82,10 @@
                                         <div class="mb-3">
                                             <label for="siteMap" class="form-label">Show in (sitemap)</label>
                                             <select name="sitemap" class="form-select">
-                                                <option {{ $page->sitemap == 1 ? 'selected' : '' }} value="1">Yes</option>
-                                                <option {{ $page->sitemap == 0 ? 'selected' : '' }} value="0">No</option>
+                                                <option {{ $page->sitemap == 1 ? 'selected' : '' }} value="1">Yes
+                                                </option>
+                                                <option {{ $page->sitemap == 0 ? 'selected' : '' }} value="0">No
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -197,7 +200,8 @@
                             enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="content" id="content" class="form-control" required>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light mt-3">Upload JSON</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light mt-3">Upload
+                                JSON</button>
                         </form>
                     </div>
                 </div>
