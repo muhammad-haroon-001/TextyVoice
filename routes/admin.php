@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomPageController;
+use App\Http\Controllers\dashboard\BlogController;
 use App\Http\Controllers\dashboard\DashboardController;
-use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolsController;
 
@@ -21,4 +21,7 @@ Route::prefix('emd')->group(function () {
   Route::post('upload-content/{id}', [ToolsController::class,'upload_content_file'])->name('Emd.tools.upload');
   Route::resource('custom-page', CustomPageController::class);
   Route::get('download-custom-page/{id}', [CustomPageController::class,'download_content_file'])->name('Emd.custom-page.download');
+
+  //blog
+  Route::resource('blog', BlogController::class);
 });

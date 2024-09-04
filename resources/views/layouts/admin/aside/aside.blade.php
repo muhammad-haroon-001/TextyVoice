@@ -86,12 +86,17 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="" class="menu-link">
-                        <div>List/Add</div>
+                    <a href="{{ route('blog.index') }}" class="menu-link">
+                        <div>List</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('blog.create') }}" class="menu-link">
+                        <div>Add</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('blog.index') }}" class="menu-link">
                         <div>Trash</div>
                     </a>
                 </li>
