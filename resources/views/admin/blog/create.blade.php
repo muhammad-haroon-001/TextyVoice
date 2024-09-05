@@ -16,13 +16,13 @@
 
 
 @section('content')
-    <section class="create-custom-page">
+    <section class="blog-page">
         <div class="container">
             <div class="white-bg">
-                <div class="add-custom-page-heading">
+                <div class="blog-page-heading">
                     <h3>Add Blog</h3>
                 </div>
-                <form action="{{ route('custom-page.store') }}" method="POST">
+                <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-12 col-md-6">
@@ -56,15 +56,20 @@
                         <div class="col-md-6 mb-3 col-12">
                             <label for="language" class="form-label">Language</label>
                             <select name="language" id="language" class="form-select">
-                                <option selected disabled>Select Language</option>
-                                <option value="inputField">Input Fields</option>
+                                @foreach ($languageData['languages'] as $lang)
+                                    <option value="{{ $lang['code'] }}">{{ $lang['name'] }}
+                                        ({{ $lang['code'] }})
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 mb-3 col-12">
-                            <label for="status" class="form-label">Parent</label>
-                            <select name="status" id="status" class="form-select">
-                                <option selected disabled>Status</option>
-                                <option value="1">Active</option>
+                            <label for="parent_id" class="form-label">Parent</label>
+                            <select name="parent_id" id="parent_id" class="form-select">
+                                <option value="0">This is Parent</option>
+                                @foreach ($blogs as $item)
+                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
@@ -77,7 +82,6 @@
                         <div class="col-md-6 mb-3 col-12">
                             <label for="status" class="form-label">Status</label>
                             <select name="status" id="status" class="form-select">
-                                <option selected disabled>Status</option>
                                 <option value="1">Active</option>
                                 <option value="0">Non-active</option>
                             </select>
@@ -94,12 +98,9 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
-
     </section>
-
 @endsection
 @push('page-script')
     <script>

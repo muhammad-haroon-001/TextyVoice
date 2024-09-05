@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('meta_description')->nullable();
             $table->string('language');
             $table->longText('description')->nullable();
-            $table->string('parent_id')->nullable();
-            $table->boolean('status')->comment('0 means non active, 1 mans active')->default(1);
+            $table->bigInteger('parent_id');
+            $table->unsignedBigInteger('image_id')->nullable();
+            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
+            $table->boolean('status')->comment('0 means non active, 1 means active')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

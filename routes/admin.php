@@ -24,4 +24,6 @@ Route::prefix('emd')->group(function () {
 
   //blog
   Route::resource('blog', BlogController::class);
+  Route::get('trash-blog', [BlogController::class,'trash_blog'])->name('Emd.blog.trash');
+  Route::put('restore-blog/{id}', [BlogController::class,'restore_blog'])->name('Emd.blog.restore');
 });

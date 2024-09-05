@@ -29,19 +29,20 @@
         </div>
     </section>
 @endsection
+{{-- @dd($blogs) --}}
 @push('page-script')
     <script>
         $("#custom_page_table").DataTable({
-            data: {!! json_encode($customPages) !!},
+            data: {!! json_encode($blogs) !!},
             columns: [{
                     data: 'id',
                     title: 'Id'
                 },
                 {
                     data: null,
-                    title: 'Name',
+                    title: 'Title',
                     render: function(data, type, row) {
-                        return '<a href=" /emd/custom-page/' + data.id + '/edit">' + data.name + '</a>';
+                        return '<a href=" /emd/blog/' + data.id + '/edit">' + data.title + '</a>';
                     }
                 },
                 {
@@ -49,20 +50,6 @@
                     title: 'Slug',
                     render: function(data, type, row) {
                         return data.slug;
-                    }
-                },
-                {
-                    data: null,
-                    title: 'page Key',
-                    render: function(data, type, row) {
-                        return data.page_key;
-                    }
-                },
-                {
-                    data: null,
-                    title: 'Blade File',
-                    render: function(data, type, row) {
-                        return data.blade_view;
                     }
                 },
                 {
@@ -83,12 +70,12 @@
                     data: null,
                     title: 'Delete',
                     render: function(data, type, row) {
-                      const deleteUrl = `/emd/custom-page/${data.id}`;
+                      const deleteUrl = `/emd/blog/${data.id}`;
                         return `
                           <form action="${deleteUrl}" method="POST" style="display:inline;">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this tool?')">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this blog?')">Delete</button>
                             </form>
                         `
                     }

@@ -96,7 +96,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('blog.index') }}" class="menu-link">
+                    <a href="{{ route('Emd.blog.trash') }}" class="menu-link">
                         <div>Trash</div>
                     </a>
                 </li>
