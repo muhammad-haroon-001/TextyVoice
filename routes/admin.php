@@ -7,8 +7,8 @@ use App\Http\Controllers\dashboard\SettingKeyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolsController;
 
-
-Route::prefix('emd')->group(function () {
+require __DIR__.'/auth.php';
+Route::prefix('emd')->middleware('auth')->group(function () {
   Route::get('dashboard', [DashboardController::class, 'index'])->name('Emd.dashboard');
   Route::get('tools', [ToolsController::class, 'index'])->name('Emd.tools');
   Route::get('create-tools', [ToolsController::class, 'create'])->name('Emd.tools.create');
@@ -30,5 +30,4 @@ Route::prefix('emd')->group(function () {
 
   //setting keys
   Route::resource('setting-key', SettingKeyController::class);
-  // Route::put('setting-key/update', [SettingKeyController::class, 'update'])->name('setting-key.update');
-});
+})->middleware('auth');

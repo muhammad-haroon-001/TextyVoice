@@ -18,26 +18,21 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-0">John Doe</h6>
-                                    <small class="text-muted">Admin</small>
+                                    <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                    <small class="text-muted">{{ Auth::user()->user_type }}</small>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <div class="dropdown-divider my-1"></div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
-                            <i class="mdi mdi-account-outline me-1 mdi-20px"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        
+                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class='mdi mdi-power me-1 mdi-20px'></i>
                             <span class="align-middle">Log Out</span>
-                        </a>
+                        </a>                        
                     </li>
                 </ul>
             </li>

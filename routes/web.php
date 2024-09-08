@@ -1,12 +1,19 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dashboard\Analytics;
-use App\Http\Controllers\frontend\FrontendController;
-use App\Http\Controllers\ToolsController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-
-Route::get('/{slug?}', [FrontendController::class, 'showPageBySlug'])
-    ->where('slug', '[a-zA-Z0-9-]+')
-    ->name('page.get');
+Route::get('/', function () {
+    return view('welcome');
+});
