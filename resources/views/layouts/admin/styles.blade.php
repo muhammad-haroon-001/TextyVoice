@@ -8,19 +8,19 @@
 
  <!-- Optionally include DataTables CSS for Bootstrap integration -->
  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="{{ asset(mix('assets/vendor/fonts/materialdesignicons.css')) }}" />
-<link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/node-waves/node-waves.css')) }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/fonts/materialdesignicons.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css') }}" />
 <!-- Core CSS -->
-<link rel="stylesheet" href="{{ asset(mix('assets/vendor/css/core.css')) }}" />
-<link rel="stylesheet" href="{{ asset(mix('assets/vendor/css/theme-default.css')) }}" />
-<link rel="stylesheet" href="{{ asset(mix('assets/css/demo.css')) }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 <!-- Vendors CSS -->
-<link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')) }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css')}}">
 
 <!-- Vendor Styles -->
-@yield('vendor-style')
+@stack('vendor-style')
 
 
 <!-- Page Styles -->
-@yield('page-style')
+@stack('page-style')

@@ -1,14 +1,6 @@
 @extends('layouts/adminLayout')
 
-@section('title', 'Edit')
-
-@section('vendor-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}">
-@endsection
-
-@section('vendor-script')
-    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-@endsection
+@section('title', 'Edit Blog')
 
 @section('content')
     <section class="blog-page">

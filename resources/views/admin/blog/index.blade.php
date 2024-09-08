@@ -1,19 +1,6 @@
 @extends('layouts/adminLayout')
 
-@section('title', 'Custom Pages')
-
-@section('vendor-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}">
-@endsection
-
-@section('vendor-script')
-    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-@endsection
-
-@section('page-script')
-    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
-@endsection
-
+@section('title', 'Blogs')
 
 @section('content')
     <section class="create-custom-page">
@@ -29,7 +16,6 @@
         </div>
     </section>
 @endsection
-{{-- @dd($blogs) --}}
 @push('page-script')
     <script>
         $("#custom_page_table").DataTable({

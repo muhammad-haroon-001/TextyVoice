@@ -107,68 +107,6 @@ class BlogController extends Controller
     return view('admin.blog.edit', compact('blog'));
   }
 
-  // public function update(Request $request, Blog $blog)
-  // {
-  //   $request->validate([
-  //       'title' => 'required|string|max:255',
-  //       'slug' => 'required|string|max:255|unique:blogs,slug,' . $blog->id,
-  //       'meta_title' => 'required|string|max:255',
-  //       'meta_description' => 'required|string|max:255',
-  //       'language' => 'required|string|max:10',
-  //       'description' => 'string',
-  //       'parent_id' => 'required|integer',
-  //       'status' => 'required|boolean',
-  //       'image' => 'image|mimes:jpg,jpeg,png'
-  //   ]);
-  //   $blog->update($request->except('image'));
-  //   if ($request->hasFile('image')) {
-  //       $image = $request->file('image');
-  //       $filename = Str::random(40) . '.' . $image->getClientOriginalExtension();
-  //       $path = $image->storeAs('images/original', $filename, 'public');
-  //       $filename = basename($path);
-  //       $fullPath = storage_path("app/public/images/original/{$filename}");
-  //       if (file_exists($fullPath)) {
-  //           $sizes = ['900', '300', '150'];
-  //           foreach ($sizes as $size) {
-  //               if (!File::exists(storage_path("app/public/images/{$size}"))) {
-  //                   File::makeDirectory(storage_path("app/public/images/{$size}"), 0775, true);
-  //               }
-  //           }
-  //           $img = Image::make($fullPath);
-  //           $img->resize(900, 900)->save(storage_path("app/public/images/900/{$filename}"));
-  //           $img->resize(300, 300)->save(storage_path("app/public/images/300/{$filename}"));
-  //           $img->resize(150, 150)->save(storage_path("app/public/images/150/{$filename}"));
-  //           if ($blog->image_id) {
-  //               $oldMedia = Media::find($blog->image_id);
-  //               if ($oldMedia) {
-  //                   Storage::delete([
-  //                       "public/images/original/{$oldMedia->path}",
-  //                       "public/images/900/{$oldMedia->path}",
-  //                       "public/images/300/{$oldMedia->path}",
-  //                       "public/images/150/{$oldMedia->path}"
-  //                   ]);
-  //                   $oldMedia->delete();
-  //               }
-  //           }
-
-  //           $media = Media::create([
-  //               'path' => $filename,
-  //               'dimensions' => json_encode([
-  //                   '900x900' => "images/900/{$filename}",
-  //                   '300x300' => "images/300/{$filename}",
-  //                   '150x150' => "images/150/{$filename}",
-  //                   'original' => "images/original/{$filename}"
-  //               ])
-  //           ]);
-
-  //           $blog->update(['image_id' => $media->id]);
-  //       } else {
-  //           return redirect()->back()->withErrors(['image' => 'Image could not be processed.']);
-  //       }
-  //   }
-  //   return redirect()->route('blog.index')->with('success', 'Blog updated successfully.');
-  // }
-
   public function update(Request $request, Blog $blog)
 {
     // Validate the request

@@ -6,7 +6,7 @@
             <span class="app-brand-logo demo me-1">
 
             </span>
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">EMD V1</span>
+            <span class="app-brand-text demo menu-text fw-semibold ms-2">EMD</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -98,6 +98,19 @@
                 <li class="menu-item">
                     <a href="{{ route('Emd.blog.trash') }}" class="menu-link">
                         <div>Trash</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-book"></i>
+                <div>Setting</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('setting-key.index') }}" class="menu-link">
+                        <div>Setting Keys</div>
                     </a>
                 </li>
             </ul>

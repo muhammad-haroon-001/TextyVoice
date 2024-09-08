@@ -1,14 +1,6 @@
 @extends('layouts/adminLayout')
 
-@section('title', 'Tools')
-
-@section('vendor-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}">
-@endsection
-
-@section('vendor-script')
-    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-@endsection
+@section('title', 'Trash Tools')
 
 @section('content')
     <section class="trash-tools">
@@ -32,9 +24,7 @@
             </div>
         </div>
     </section>
-    </section>
 @endsection
-
 
 @push('page-script')
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>

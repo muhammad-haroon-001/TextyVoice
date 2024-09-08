@@ -2,17 +2,17 @@
 
 @section('title', 'Dashboard')
 
-@section('vendor-style')
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
-@endsection
+@push('vendor-style')
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
+@endpush
 
-@section('vendor-script')
-<script src="{{asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
-@endsection
+@push('vendor-script')
+    <script src="{{asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+@endpush
 
-@section('page-script')
-<script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
-@endsection
+@push('page-script')
+    <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
+@endpush
 
 @section('content')
 @endsection

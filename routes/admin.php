@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\dashboard\BlogController;
 use App\Http\Controllers\dashboard\DashboardController;
+use App\Http\Controllers\dashboard\SettingKeyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolsController;
 
@@ -26,4 +27,8 @@ Route::prefix('emd')->group(function () {
   Route::resource('blog', BlogController::class);
   Route::get('trash-blog', [BlogController::class,'trash_blog'])->name('Emd.blog.trash');
   Route::put('restore-blog/{id}', [BlogController::class,'restore_blog'])->name('Emd.blog.restore');
+
+  //setting keys
+  Route::resource('setting-key', SettingKeyController::class);
+  // Route::put('setting-key/update', [SettingKeyController::class, 'update'])->name('setting-key.update');
 });

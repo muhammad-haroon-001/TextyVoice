@@ -1,16 +1,12 @@
 @extends('layouts/adminLayout')
 
 @section('title', 'Tools')
-
-@section('vendor-style')
+@push('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}">
-@endsection
-
-@section('vendor-script')
+@endpush
+@push('vendor-script')
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-@endsection
-
-
+@endpush
 
 @section('content')
     <section class="tool-index">
@@ -26,7 +22,6 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <!-- Tool Name -->
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="toolName" class="form-label">Tool Name</label>
@@ -214,198 +209,198 @@
             </div>
         </div>
     </section>
-    @push('page-script')
-        <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                tinymce.init({
-                    selector: 'textarea.tinymce',
-                    // Add any other TinyMCE configuration options here
-                });
-                $(".get_trans_btn").click(function() {
-                    $(".get_trans_btn").hide();
-                    var data_key = $(this).attr('id');
-                    var content_text = $("#" + data_key).val();
-                    var lang = "es";
-                    $.ajax({
-                        url: "http://resumir.org/admin/tool/key_translate",
-                        method: 'POST',
-                        data: {
-                            content_text: content_text,
-                            lang: lang,
-                            _token: "qC8DuW34pLu658bZ4XzkUlbeWTxtD8eeRGM09Oxw"
-                        },
-                        success: function(ret) {
-                            $(".get_trans_btn").show();
-                            $("#" + data_key).val(ret);
-                            tinymce.get(data_key).setContent(ret);
-                        }
-                    });
-                });
+@endsection
 
-                $(".get_trans_all_btn").click(function() {
-                    var result = confirm("Are you sure you want to proceed?");
-                    if (!result) {
-                        return false;
-                    }
-                    $(".get_trans_all_btn").hide();
-                    $(".waiting_for_all_trans").removeClass("d-none");
-                    var lang = "es";
-                    var tool_id = "1";
-                    $.ajax({
-                        url: "http://resumir.org/admin/tool/all_key_translate",
-                        method: 'POST',
-                        data: {
-                            tool_id: tool_id,
-                            lang: lang,
-                            _token: "qC8DuW34pLu658bZ4XzkUlbeWTxtD8eeRGM09Oxw"
-                        },
-                        success: function(ret) {
-                            window.location.reload();
-                        }
-                    });
-                });
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $(".confirm_convert").on('click', function() {
-                    convert_input_type($(this).attr('data-target'));
-                    $('#alert-modal').modal('toggle');
-                });
-                $(".modal_close_btn").on('click', function() {
-                    let id = $(this).attr('data-target');
-                    let element = $("#" + id);
-                    element.val(element.attr('data-original-type'));
-                });
-                $(".js-input-type").on("change", function() {
-                    var target = $(this).attr('data-target');
-                    $(".modal_close_btn").attr('data-target', target);
-                    if ($(this).attr('data-original-type') == 'richText') {
-                        $(".confirm_convert").attr('data-target', target);
-                        $("#alertModalBtn").click();
-                    } else {
-                        convert_input_type(target);
-                    }
-                    return;
-                });
-                $(document).on('click', '.cross', function() {
-                    if (confirm("Are you Sure you want to delete this element?")) {
-                        $(this).parents('.tool_content_row').remove();
+@push('page-script')
+    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            tinymce.init({
+                selector: 'textarea.tinymce',
+            });
+            $(".get_trans_btn").click(function() {
+                $(".get_trans_btn").hide();
+                var data_key = $(this).attr('id');
+                var content_text = $("#" + data_key).val();
+                var lang = "es";
+                $.ajax({
+                    url: "http://resumir.org/admin/tool/key_translate",
+                    method: 'POST',
+                    data: {
+                        content_text: content_text,
+                        lang: lang,
+                        _token: "qC8DuW34pLu658bZ4XzkUlbeWTxtD8eeRGM09Oxw"
+                    },
+                    success: function(ret) {
+                        $(".get_trans_btn").show();
+                        $("#" + data_key).val(ret);
+                        tinymce.get(data_key).setContent(ret);
                     }
                 });
-                $("#addMore").on("click", function(e) {
-                    e.preventDefault();
-                    var selectedValue = $("#add_more_type").val();
-                    var html = `<div class="row tool_content_row">
-                <input type="hidden" value="` + selectedValue + `" name="contentType[]" class="target_input_type">
-                    <div class="col-md-3 mb-3">
-                        <input type="text" name="contentKey[]" class="form-control" placeholder="Key" value="">
-                    </div>
-                    <div class="col-md-8 mb-3">`;
-                    if (selectedValue == "inputField") {
-                        html +=
-                            `<input type="text" name="contentValue[]" class="form-control" placeholder="Value" value="">`;
-                    } else if (selectedValue == "textarea") {
-                        html +=
-                            `<textarea rows="3" name="contentValue[]" class="form-control" placeholder="Content" value=""></textarea>`;
-                    } else {
-                        html +=
-                            `<input type="text" class="form-control tool_textarea" name="contentValue[]"  />`;
-                    }
-                    html += `</div><div class="col-sm-1">
-                                        <button type="button"
-                                                            class="btn btn-danger d-inline cross delete_content_key"><i class="mdi mdi-delete"></i></button>
-                                    </div></div>`;
-                    $(".tool-content").append(html);
-                    init_tinymce();
-                });
-                $("#upload-json-submit").on("click", function(e) {
-                    var json = $("#upload_json").val();
-                    try {
-                        JSON.parse(json);
-                    } catch (e) {
-                        alert(e);
-                        return false;
-                    }
-                    if (json != "") {
-                        var count = Object.keys(JSON.parse(json)).length;
-                        if (count < 1) {
-                            alert("Cannot upload empty JSON");
-                            return;
-                        } else {
-                            if (confirm("Are you sure?")) {
-                                $("#jsonform").submit();
-                            }
-                        }
-                    } else {
-                        alert("upload json");
-                        return;
-                    }
-                });
-
-                function meta_title() {
-                    var title = $("#metaTitle").val().trim();
-                    $(".char-count-num").text(title.split("").length);
-                    var total_words = title.replace(/\s+/g, ' ').split(" ").length;
-                    $(".word-count-num").text(total_words);
-                    $(".char-extraspaces-num").text(title.split(" ").length - total_words);
-                }
-
-                function meta_description() {
-                    var title = $("#metaDescription").val().trim();
-                    $(".desc-word-count-num").text(title.split("").length);
-                    var total_words = title.replace(/\s+/g, ' ').split(" ").length;
-                    $(".desc-word-count-num").text(total_words);
-                    $(".desc-char-extraspaces-num").text(title.split(" ").length - total_words);
-                }
-                $("#metaTitle").keyup(function() {
-                    meta_title();
-                });
-                $("#metaDescription").keyup(function() {
-                    meta_description();
-                });
-                meta_title();
-                meta_description();
             });
 
-            function convert_input_type(id) {
-                var element = $("#" + id);
-                let val = element.val();
-                let parent = element.closest('.row');
-                let parent_id = parent.data('id');
-                let original_input = parent.find('.input-to-target');
-                let input_val = original_input.val();
-
-                let html = "";
-                if (element.attr('data-original-type') == 'richText') {
-                    input_val = tinymce.get(parent_id).getContent({
-                        format: "text"
-                    });
+            $(".get_trans_all_btn").click(function() {
+                var result = confirm("Are you sure you want to proceed?");
+                if (!result) {
+                    return false;
                 }
-                input_val = stripHtml(input_val);
-                if (val == 'inputField') {
-                    html =
-                        "<input type='text' name='contentValue[]' class='form-control input-to-target' placeholder='Value' value='" +
-                        input_val + "'>";
-                } else if (val == 'textarea') {
-                    html =
-                        '<textarea rows="3" name="contentValue[]" class="form-control input-to-target" placeholder="Content">' +
-                        input_val + '</textarea>';
-
-                } else if (val == 'richText') {
-                    html =
-                        "<input type='text' id='" + parent_id +
-                        "' name='contentValue[]' class='form-control tool_textarea input-to-target' placeholder='Value' value='" +
-                        input_val + "'>";
+                $(".get_trans_all_btn").hide();
+                $(".waiting_for_all_trans").removeClass("d-none");
+                var lang = "es";
+                var tool_id = "1";
+                $.ajax({
+                    url: "http://resumir.org/admin/tool/all_key_translate",
+                    method: 'POST',
+                    data: {
+                        tool_id: tool_id,
+                        lang: lang,
+                        _token: "qC8DuW34pLu658bZ4XzkUlbeWTxtD8eeRGM09Oxw"
+                    },
+                    success: function(ret) {
+                        window.location.reload();
+                    }
+                });
+            });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-                parent.find(".input-value").html(html);
+            });
+            $(".confirm_convert").on('click', function() {
+                convert_input_type($(this).attr('data-target'));
+                $('#alert-modal').modal('toggle');
+            });
+            $(".modal_close_btn").on('click', function() {
+                let id = $(this).attr('data-target');
+                let element = $("#" + id);
+                element.val(element.attr('data-original-type'));
+            });
+            $(".js-input-type").on("change", function() {
+                var target = $(this).attr('data-target');
+                $(".modal_close_btn").attr('data-target', target);
+                if ($(this).attr('data-original-type') == 'richText') {
+                    $(".confirm_convert").attr('data-target', target);
+                    $("#alertModalBtn").click();
+                } else {
+                    convert_input_type(target);
+                }
+                return;
+            });
+            $(document).on('click', '.cross', function() {
+                if (confirm("Are you Sure you want to delete this element?")) {
+                    $(this).parents('.tool_content_row').remove();
+                }
+            });
+            $("#addMore").on("click", function(e) {
+                e.preventDefault();
+                var selectedValue = $("#add_more_type").val();
+                var html = `<div class="row tool_content_row">
+            <input type="hidden" value="` + selectedValue + `" name="contentType[]" class="target_input_type">
+                <div class="col-md-3 mb-3">
+                    <input type="text" name="contentKey[]" class="form-control" placeholder="Key" value="">
+                </div>
+                <div class="col-md-8 mb-3">`;
+                if (selectedValue == "inputField") {
+                    html +=
+                        `<input type="text" name="contentValue[]" class="form-control" placeholder="Value" value="">`;
+                } else if (selectedValue == "textarea") {
+                    html +=
+                        `<textarea rows="3" name="contentValue[]" class="form-control" placeholder="Content" value=""></textarea>`;
+                } else {
+                    html +=
+                        `<input type="text" class="form-control tool_textarea" name="contentValue[]"  />`;
+                }
+                html += `</div><div class="col-sm-1">
+                                    <button type="button"
+                                                        class="btn btn-danger d-inline cross delete_content_key"><i class="mdi mdi-delete"></i></button>
+                                </div></div>`;
+                $(".tool-content").append(html);
                 init_tinymce();
-                element.attr('data-original-type', val);
-                let contentType = parent.find('.target_input_type');
-                contentType.val(element.attr('data-original-type'));
+            });
+            $("#upload-json-submit").on("click", function(e) {
+                var json = $("#upload_json").val();
+                try {
+                    JSON.parse(json);
+                } catch (e) {
+                    alert(e);
+                    return false;
+                }
+                if (json != "") {
+                    var count = Object.keys(JSON.parse(json)).length;
+                    if (count < 1) {
+                        alert("Cannot upload empty JSON");
+                        return;
+                    } else {
+                        if (confirm("Are you sure?")) {
+                            $("#jsonform").submit();
+                        }
+                    }
+                } else {
+                    alert("upload json");
+                    return;
+                }
+            });
+
+            function meta_title() {
+                var title = $("#metaTitle").val().trim();
+                $(".char-count-num").text(title.split("").length);
+                var total_words = title.replace(/\s+/g, ' ').split(" ").length;
+                $(".word-count-num").text(total_words);
+                $(".char-extraspaces-num").text(title.split(" ").length - total_words);
             }
-        </script>
-    @endpush
-@endsection
+
+            function meta_description() {
+                var title = $("#metaDescription").val().trim();
+                $(".desc-word-count-num").text(title.split("").length);
+                var total_words = title.replace(/\s+/g, ' ').split(" ").length;
+                $(".desc-word-count-num").text(total_words);
+                $(".desc-char-extraspaces-num").text(title.split(" ").length - total_words);
+            }
+            $("#metaTitle").keyup(function() {
+                meta_title();
+            });
+            $("#metaDescription").keyup(function() {
+                meta_description();
+            });
+            meta_title();
+            meta_description();
+        });
+
+        function convert_input_type(id) {
+            var element = $("#" + id);
+            let val = element.val();
+            let parent = element.closest('.row');
+            let parent_id = parent.data('id');
+            let original_input = parent.find('.input-to-target');
+            let input_val = original_input.val();
+
+            let html = "";
+            if (element.attr('data-original-type') == 'richText') {
+                input_val = tinymce.get(parent_id).getContent({
+                    format: "text"
+                });
+            }
+            input_val = stripHtml(input_val);
+            if (val == 'inputField') {
+                html =
+                    "<input type='text' name='contentValue[]' class='form-control input-to-target' placeholder='Value' value='" +
+                    input_val + "'>";
+            } else if (val == 'textarea') {
+                html =
+                    '<textarea rows="3" name="contentValue[]" class="form-control input-to-target" placeholder="Content">' +
+                    input_val + '</textarea>';
+
+            } else if (val == 'richText') {
+                html =
+                    "<input type='text' id='" + parent_id +
+                    "' name='contentValue[]' class='form-control tool_textarea input-to-target' placeholder='Value' value='" +
+                    input_val + "'>";
+            }
+            parent.find(".input-value").html(html);
+            init_tinymce();
+            element.attr('data-original-type', val);
+            let contentType = parent.find('.target_input_type');
+            contentType.val(element.attr('data-original-type'));
+        }
+    </script>
+@endpush

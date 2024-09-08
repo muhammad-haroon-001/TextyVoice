@@ -13,7 +13,7 @@
 <!-- Optionally include DataTables JavaScript for Bootstrap integration -->
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('assets/admin/js/admin.js')}}"></script>
-@yield('vendor-script')
+@stack('vendor-script')
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
 <script src="{{ asset(mix('assets/js/main.js')) }}"></script>
