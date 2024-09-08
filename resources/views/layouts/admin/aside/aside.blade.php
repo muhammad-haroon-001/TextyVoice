@@ -1,29 +1,15 @@
-<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-    <!-- ! Hide app brand if navbar-full -->
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
     <div class="app-brand demo">
         <a href="{{ url('/') }}" class="app-brand-link">
-            <span class="app-brand-logo demo me-1">
-
-            </span>
+            <span class="app-brand-logo demo me-1"></span>
             <span class="app-brand-text demo menu-text fw-semibold ms-2">EMD</span>
         </a>
-
-        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-            <i class="mdi menu-toggle-icon d-xl-block align-middle mdi-20px"></i>
-        </a>
     </div>
-
-    <div class="menu-inner-shadow"></div>
-
     <ul class="menu-inner py-1">
-
-        {{-- main menu --}}
         <li class="menu-item active">
             <a href="{{ route('Emd.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
                 <div>Dashboard</div>
-
             </a>
         </li>
         <li class="menu-item">

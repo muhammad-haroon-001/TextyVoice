@@ -179,7 +179,13 @@
 
                                 </span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        
+
+                        <div class="col-12">
+                            <div class="mt-5">
+                                <button type="submit" class="btn btn-primary ms-auto d-flex waves-effect waves-light">update</button>
+                            </div>
+                        </div>
                         </form>
                     </div>
                 </div>

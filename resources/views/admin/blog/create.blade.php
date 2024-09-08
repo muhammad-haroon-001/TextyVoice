@@ -77,7 +77,7 @@
                             <textarea name="description" class="tool_textarea"></textarea>
                         </div>
 
-                        <div class="col-12"></div>
+                        <div class="col-12">
                             <div class="mt-5">
                                 <button type="submit" class="btn btn-primary ms-auto d-flex waves-effect waves-light">Submit</button>
                             </div>

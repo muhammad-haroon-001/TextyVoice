@@ -145,7 +145,12 @@
                                         </div>
                                     </span>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <div class="col-12">
+                                    <div class="mt-5">
+                                        <button type="submit"
+                                            class="btn btn-primary ms-auto d-flex waves-effect waves-light">Submit</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
