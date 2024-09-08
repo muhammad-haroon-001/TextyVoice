@@ -56,7 +56,6 @@
         </li>
         <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">
-                {{-- need icon for blog --}}
                 <i class="menu-icon tf-icons mdi mdi-file"></i>
                 <div>Custom Pages</div>
             </a>
@@ -80,8 +79,7 @@
         </li>
         <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">
-                {{-- need icon for blog --}}
-                <i class="menu-icon tf-icons mdi mdi-book"></i>
+                <i class="menu-icon tf-icons mdi mdi-credit-card-outline"></i>
                 <div>Blog</div>
             </a>
             <ul class="menu-sub">
@@ -104,7 +102,7 @@
         </li>
         <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons mdi mdi-book"></i>
+                <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
                 <div>Setting</div>
             </a>
             <ul class="menu-sub">
