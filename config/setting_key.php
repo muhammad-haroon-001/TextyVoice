@@ -11,4 +11,6 @@ return [
     'demo3' => 'demo321 pily',
     'product_version' => '3.0',
     'pily' => 'pily bc',
+    'tyui' => 'tyui',
+    'wertyuiop' => 'ertyuiop[]]7',
 ];

@@ -36,8 +36,5 @@ package-lock.log
 # Ignore environment variables
 .env
 
-# Ignore node modules directory
-node_modules/
-
 # Ignore composer.lock file
 composer.lock
