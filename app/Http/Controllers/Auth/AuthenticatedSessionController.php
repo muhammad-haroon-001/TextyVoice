@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,10 +16,17 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    
+    public function create(Request $request)
     {
-        return view('auth.login');
+        $hash = $request->query('hash');
+        if (!$hash || !User::where('hash', $hash)->exists()) {
+            return redirect('/');
+        }
+        return view('auth.login', ['hash' => $hash]);
     }
+
+
 
     /**
      * Handle an incoming authentication request.

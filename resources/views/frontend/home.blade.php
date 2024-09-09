@@ -1,4 +1,4 @@
-@extends('layouts.main')
+{{-- @extends('layouts.main')
 
 @section('content')
    <div class="container">
@@ -6,4 +6,4 @@
       {{$tool->tool_name}}
     </div>
    </div>
-@endsection
+@endsection --}}

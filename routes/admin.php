@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolsController;
 
 require __DIR__.'/auth.php';
+
 Route::prefix('emd')->middleware('auth')->group(function () {
   Route::get('dashboard', [DashboardController::class, 'index'])->name('Emd.dashboard');
   Route::get('tools', [ToolsController::class, 'index'])->name('Emd.tools');
