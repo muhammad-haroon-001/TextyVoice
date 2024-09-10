@@ -44,7 +44,7 @@ package-lock.log
 # Ignore IDE/editor directories
 /.idea
 /.vscode
-
+/vendor
 # Ignore everything inside emd_custom_pages directory
 /resources/views/frontend/emd_custom_pages/*
 !/resources/views/frontend/emd_custom_pages/.gitkeep
