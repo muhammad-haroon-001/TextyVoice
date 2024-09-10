@@ -1,32 +1,14 @@
-/.phpunit.cache
+# Ignore node modules
 /node_modules
 
+# Ignore public build files
 /public/build
 /public/hot
 /public/storage
-/storage/*.key
-/vendor
-
-# .env
-.env.backup
-.env.production
-.phpunit.result.cache
-
-docker-compose.override.yml
-
-Homestead.json
-Homestead.yaml
-npm-debug.log
-/package-lock.json
-yarn-error.log
-yarn.lock
-package-lock.log
-/.idea
-/.vscode
-
 /public/css
 /public/js
 /public/mix-manifest.json
+
 # But not these files...
 !/public/assets/*
 /public/assets/js
@@ -35,6 +17,34 @@ package-lock.log
 
 # Ignore environment variables
 .env
+.env.backup
+.env.production
 
-# Ignore composer.lock file
+# Ignore composer lock file
 composer.lock
+
+# Ignore PHPUnit cache
+/.phpunit.cache
+.phpunit.result.cache
+
+# Ignore Docker-related files
+docker-compose.override.yml
+
+# Ignore Homestead files
+Homestead.json
+Homestead.yaml
+
+# Ignore npm/yarn logs and lock files
+npm-debug.log
+/package-lock.json
+yarn-error.log
+yarn.lock
+package-lock.log
+
+# Ignore IDE/editor directories
+/.idea
+/.vscode
+
+# Ignore everything inside emd_custom_pages directory
+/resources/views/frontend/emd_custom_pages/*
+!/resources/views/frontend/emd_custom_pages/.gitkeep
