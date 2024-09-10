@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
+require __DIR__.'/custom_pages.php';
 
 Route::get('/', [FrontendController::class, 'homeTool'])->name('home');
 
