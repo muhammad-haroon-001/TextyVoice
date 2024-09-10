@@ -18,7 +18,7 @@
 
     @include('frontend/head')
 
-    <title>{{ @$tool->tool_name }}</title>
+    <title>{{ @$tool->tool_name ?? $page->name }}</title>
 </head>
 
 <body>

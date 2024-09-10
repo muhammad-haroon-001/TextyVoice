@@ -79,25 +79,38 @@ class CustomPageController extends Controller
       info('File already exists: ' . $filePath);
     }
 
-    try{
+    try {
+      $customPage = CustomPage::create([
+        'name' => $validatedData['name'],
+        'blade_view' => $validatedData['view'],
+        'slug' => $validatedData['slug'],
+        'page_key' => $validatedData['key'],
+        'meta_title' => $validatedData['meta_title'],
+        'meta_description' => $validatedData['meta_description'],
+        'sitemap' => $isSitemap,
+        'content_keys' => $jsonContent,
+      ]);
 
-    $customPage = CustomPage::create([
-      'name' => $validatedData['name'],
-      'blade_view' => $validatedData['view'],
-      'slug' => $validatedData['slug'],
-      'page_key' => $validatedData['key'],
-      'meta_title' => $validatedData['meta_title'],
-      'meta_description' => $validatedData['meta_description'],
-      'sitemap' => $isSitemap,
-      'content_keys' => $jsonContent
-    ]);
-    if ($customPage) {
-      return redirect()->route('custom-page.index');
-    } else {
-      return redirect()->back();
-    }
+      if ($customPage) {
+        $routeDefinition = "Route::get('{$validatedData['slug']}', 'custom_page_display')->name('EmdCustomPage.{$validatedData['slug']}');";
 
-    }catch(\Exception $e){
+        $routeFilePath = base_path('routes/custom_pages.php');
+        $routeFileContent = FacadesFile::get($routeFilePath);
+        $insertPosition = strpos($routeFileContent, "});");
+        if ($insertPosition !== false) {
+          $updatedRouteFileContent = substr_replace($routeFileContent, "    " . $routeDefinition . "\n", $insertPosition, 0);
+          FacadesFile::put($routeFilePath, $updatedRouteFileContent);
+        } else {
+          info("Route group not found in custom_pages.php.");
+        }
+
+
+        return redirect()->route('custom-page.index');
+      } else {
+        return redirect()->back();
+      }
+
+    } catch (\Exception $e) {
       info($e->getMessage());
     }
 

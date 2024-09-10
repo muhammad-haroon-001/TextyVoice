@@ -10,25 +10,66 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
 
-  public function showPageBySlug($slug = null)
-  {
-    // Check if the slug is null or exists in the Tools table
-    if (is_null($slug) || Tools::where('tool_slug', $slug)->exists()) {
-      if (is_null($slug)) {
-        $tool = Tools::where('is_home', 1)->firstOrFail();
-      } else {
-        $tool = Tools::where('tool_slug', $slug)->firstOrFail();
-      }
 
-      if ($tool->is_home == 1) {
-        return view('frontend.home', compact('tool'));
-      } else {
-        $viewName = 'frontend.emd_tool_pages.' . $tool->tool_slug;
-        return view($viewName, compact('tool'));
+  public function homeTool()
+  {
+    $tool = Tools::where('is_home', 1)->firstOrFail();
+    $params = [
+      'meta_title' => $tool->meta_title,
+      'meta_description' => $tool->meta_description,
+      'content' => json_decode($tool->content_keys),
+      'language' => $tool->language,
+      'tool' => $tool
+    ];
+    return view('frontend.home', $params);
+  }
+
+
+  public function native_tools_language($slug = null)
+  {
+
+      $tool = Tools::where('tool_slug', $slug)->firstOrFail();
+      if ($tool->parent_id !== 0) {
+          abort(404);
       }
+      $viewName = 'frontend.emd_tool_pages.' . $tool->tool_slug;
+      $params = [
+        'meta_title' => $tool->meta_title,
+        'meta_description' => $tool->meta_description,
+        'content' => json_decode($tool->content_keys),
+        'language' => $tool->language,
+        'tool' => $tool
+      ];
+
+      return view($viewName, $params);
+  }
+
+
+  public function other_tools_language($lang, $slug)
+{
+    // Fetch the tool based on the slug and language
+    $tool = Tools::with('parent')->where('tool_slug', $slug)->where('language', $lang)->firstOrFail();
+
+    // Check if the tool is a parent (parent_id is 0)
+    if ($tool->parent_id === 0) {
+        // If the tool is a parent, abort with a 404 error
+        abort(404);
     }
 
-    // If the slug exists in the CustomPage table
+    // If the tool is a child, fetch the parent tool
+    $parentTool = $tool->parent;
+    $viewName = 'frontend.emd_tool_pages.' . $parentTool->tool_slug;
+
+    // Return the view with the tool and parentTool data
+    return view($viewName, compact('tool', 'parentTool'));
+}
+
+
+
+
+  public function showCustomPageBySlug($slug = null)
+  {
+    // Check if the slug exists in the CustomPage table
     if (CustomPage::where('slug', $slug)->exists()) {
       $customPage = CustomPage::where('slug', $slug)->firstOrFail();
       $viewName = 'frontend.emd_custom_pages.' . $customPage->blade_view;
@@ -45,5 +86,6 @@ class FrontendController extends Controller
     // If the slug doesn't match any records, return a 404 response
     abort(404);
   }
+
 
 }
