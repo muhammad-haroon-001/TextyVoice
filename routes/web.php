@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\frontend\CustomArrayController;
 use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,7 @@ Route::get('{lang}/{slug}', [FrontendController::class, 'other_tools_language'])
 
 // Route for custom pages directly with {slug}
 // Route::get('{slug}', [FrontendController::class, 'showCustomPageBySlug'])->name('custom.page');
+
+//blog page
+Route::get('blog', [CustomArrayController::class, 'main_blog_page'])->name('blog');
+Route::get('blog/{slug}', [CustomArrayController::class, 'single_blog_page'])->name('single.blog');
