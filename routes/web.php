@@ -20,6 +20,10 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/custom_pages.php';
 
+
+//blog page
+Route::get('blog', [CustomArrayController::class, 'main_blog_page'])->name('blog');
+Route::get('blog/{slug}', [CustomArrayController::class, 'single_blog_page'])->name('single.blog');
 Route::get('/', [FrontendController::class, 'homeTool'])->name('home');
 
 // Route for tools without language parameter (e.g., /tool-slug)
@@ -32,7 +36,3 @@ Route::get('{lang}/{slug}', [FrontendController::class, 'other_tools_language'])
 
 // Route for custom pages directly with {slug}
 // Route::get('{slug}', [FrontendController::class, 'showCustomPageBySlug'])->name('custom.page');
-
-//blog page
-Route::get('blog', [CustomArrayController::class, 'main_blog_page'])->name('blog');
-Route::get('blog/{slug}', [CustomArrayController::class, 'single_blog_page'])->name('single.blog');
