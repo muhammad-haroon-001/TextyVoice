@@ -186,6 +186,13 @@ class CustomPageController extends Controller
   }
 
 
+  public function trashPages(Request $request)
+  {
+    $trashPage = CustomPage::onlyTrashed()->get();
+    
+  }
+
+
   public function download_content_file($id)
   {
     $page = CustomPage::findOrFail($id);
