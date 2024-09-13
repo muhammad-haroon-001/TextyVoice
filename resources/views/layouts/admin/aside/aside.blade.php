@@ -12,29 +12,31 @@
                 <div>Dashboard</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
-                <div>Users</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('users.index') }}" class="menu-link">
-                        <div>List</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('users.create') }}" class="menu-link">
-                        <div>Add</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('Emd.user.trash') }}" class="menu-link">
-                        <div>Trash</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if (auth()->user()->user_type == 0)
+            <li class="menu-item">
+                <a href="#" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
+                    <div>Users</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('users.index') }}" class="menu-link">
+                            <div>List</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('users.create') }}" class="menu-link">
+                            <div>Add</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('Emd.user.trash') }}" class="menu-link">
+                            <div>Trash</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
         </li>
         <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">

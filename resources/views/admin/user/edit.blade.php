@@ -35,6 +35,7 @@
                         <div class="col-md-6 mb-3 col-12">
                             <label for="user_type" class="form-label">Role</label>
                             <select name="user_type" id="user_type" class="form-select">
+                                <option value="1" {{ $user->user_type == 0 ? 'selected' : '' }}>Admin</option>
                                 <option value="1" {{ $user->user_type == 1 ? 'selected' : '' }}>Support</option>
                                 <option value="2" {{ $user->user_type == 2 ? 'selected' : '' }}>Product Manager</option>
                                 <option value="3" {{ $user->user_type == 3 ? 'selected' : '' }}>Developer</option>

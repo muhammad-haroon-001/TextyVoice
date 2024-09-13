@@ -35,6 +35,7 @@
                         <div class="col-md-6 mb-3 col-12">
                             <label for="user_type" class="form-label">Role</label>
                             <select name="user_type" id="user_type" class="form-select">
+                                <option value="0">Admin</option>
                                 <option value="1">Support</option>
                                 <option value="2">Product Manager</option>
                                 <option value="3">Developer</option>
