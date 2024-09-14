@@ -5,6 +5,7 @@
     <div class="bg-red py-5">
       {{$tool->tool_name}}
       {{$content->new->value}}
+      {{-- {{$content->new->value}} --}}
     </div>
    </div>
 @endsection

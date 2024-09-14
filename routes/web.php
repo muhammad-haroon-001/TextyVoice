@@ -31,4 +31,3 @@ Route::controller(FrontendController::class)->group(function () {
 });
 // Route for custom pages directly with {slug}
 // Route::get('{slug}', [FrontendController::class, 'showCustomPageBySlug'])->name('custom.page');
-
