@@ -97,6 +97,7 @@ class ToolsController extends Controller
         $jsonContent = $parent->content_keys;
       } else {
         $jsonContent == $jsonContent;
+      }
     }
 
     $tool = Tools::create([
