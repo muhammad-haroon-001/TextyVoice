@@ -27,7 +27,10 @@
         content="{{ config('variables.templateDescription') ? config('variables.templateDescription') : '' }}" />
     <meta name="keywords"
         content="{{ config('variables.templateKeyword') ? config('variables.templateKeyword') : '' }}">
-    <!-- laravel CRUD token -->
+    @if (env('APP_ENV') == 'local')
+        <meta name="robots" content="noindex, nofollow" />
+    @endif
+        <!-- laravel CRUD token -->
     <meta name="_token" content="{{ csrf_token() }}">
     <!-- Canonical SEO -->
     <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">

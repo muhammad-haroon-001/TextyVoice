@@ -85,3 +85,35 @@ textarea{
         -moz-osx-font-smoothing: grayscale;
     }
 /* auth design  end */
+
+
+
+/* Custom Badge Styles */
+.badge{
+    font-size: 10px;
+    text-transform: lowercase;
+}
+.badge-admin {
+    background-color: #007bff;
+    color: white;
+}
+
+.badge-support {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.badge-product-manager {
+    background-color: #ffc107;
+    color: white;
+}
+
+.badge-developer {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-other {
+    background-color: #6c757d;
+    color: white;
+}

@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\dashboard\BlogController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\SettingKeyController;
+use App\Http\Controllers\dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolsController;
 
@@ -29,4 +30,8 @@ Route::prefix('emd')->middleware('auth')->group(function () {
 
   //setting keys
   Route::resource('setting-key', SettingKeyController::class);
+  // users
+  Route::resource('users', UserController::class);
+  Route::get('trash-user', [UserController::class,'TrashUser'])->name('Emd.user.trash');
+  Route::put('restore-user/{id}', [UserController::class,'restoreUser'])->name('Emd.users.restore');
 })->middleware('auth');

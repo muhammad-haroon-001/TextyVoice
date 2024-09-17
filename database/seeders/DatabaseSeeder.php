@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'Mr. Haroon',
-            'email' => 'mrharoon@gmail.com',
+            'email' => 'haroon@gmail.com',
             'password' => Hash::make('12345678'),
-            'user_type' => 'admin',
+            'user_type' => '0',
             'hash' => '4260',
         ]);
     
@@ -23,15 +23,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Imran',
             'email' => 'imran@gmail.com',
             'password' => Hash::make('12345678'),
-            'user_type' => 'admin',
+            'user_type' => '0',
             'hash' => '4321',
         ]);
-    
         User::create([
-            'name' => 'Noman',
-            'email' => 'noman@gmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
-            'user_type' => 'admin',
+            'user_type' => '0',
             'hash' => '9876',
         ]);
     }

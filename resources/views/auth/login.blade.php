@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login|EMD</title>
+    <title>Login | EMD</title>
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css')}}">
 </head>
 <body>

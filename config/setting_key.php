@@ -13,4 +13,5 @@ return [
     'pily' => 'pily bc',
     'tyui' => 'tyui',
     'wertyuiop' => 'ertyuiop[]]7',
+    'project_version' => 'v1.0',
 ];
