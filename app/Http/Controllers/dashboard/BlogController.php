@@ -15,7 +15,7 @@ class BlogController extends Controller
 {
   public function index()
   {
-    $blogs = Blog::with('image')->get();
+    $blogs = Blog::with('media')->get();
     return view('admin.blog.index', compact('blogs'));
   }
 

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CustomArrayController extends Controller
 {
     public function main_blog_page(){
-        $blogs = Blog::where('status', 1)->get();
+        $blogs = Blog::where('status', 1)->with('media')->get();
         $params = [
             'blogs' => $blogs
         ];

@@ -12,8 +12,8 @@
           </a>
       </div>
       <div class="nav-list d-flex-jc-ai">
-          <a href="{{ route('home') }}" class="active">Home</a>
-
+          <a href="{{ route('home') }}" class="active">Text To Speech</a>
+          <a href="{{ route('tool','speech-to-text') }}">Speech To Text</a>
           <a href="{{ route('blog') }}" class="">Blogs</a>
           <a href="{{ route('EmdCustomPage.contact-us') }}" class="">Contact</a>
       </div>

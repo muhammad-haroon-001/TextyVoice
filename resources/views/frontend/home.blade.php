@@ -1,5 +1,5 @@
 @extends('layouts.frontend.main')
-@section('title', @$tool->title)
+@section('title', @$tool->tool_name)
 @push('style')
 <style>
     #main_header {
@@ -14,7 +14,7 @@
    
     <section class="tool_bg">
         <div class="tool-top d-flex-column d-flex-jc-ai-g">
-            <h1>Texty Audio</h1>
+            <h1>{{ @$content->main_heading->value }}</h1>
             <p>To use Texty Audio simply add your topic in the input box with essay length and click on the &quot;Write Essay&quot; button.</p>
         </div>
         <form action="#" method="POST">
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <button type="submit" class="btn-generate btn-11 d-flex-jc-ai-g" id="EssaySubmit">
-                <span>Generate Text</span>
+                <span>Generate Voice</span>
             </button>
         </form>
         <div class="disclaimer">
