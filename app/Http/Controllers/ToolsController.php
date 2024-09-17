@@ -96,8 +96,7 @@ class ToolsController extends Controller
       if ($parent) {
         $jsonContent = $parent->content_keys;
       } else {
-        return redirect()->route('Emd.tools')->with('error', 'Parent tool not found');
-      }
+        $jsonContent == $jsonContent;
     }
 
     $tool = Tools::create([
