@@ -73,7 +73,11 @@ class CustomPageController extends Controller
     $filePath = $directoryPath . $validatedData['view'] . '.blade.php';
     info('Attempting to create file at: ' . $filePath);
     if (!FacadesFile::exists($filePath)) {
-      $result = FacadesFile::put($filePath, '@extends(\'layouts.frontend.main\')');
+      $result = FacadesFile::put($filePath, 
+        "@extends('layouts.frontend.main')\n" .
+        "@section('content')\n" .
+        "@endsection\n"
+    );
       info('File creation result: ' . ($result !== false ? 'Success' : 'Failed'));
     } else {
       info('File already exists: ' . $filePath);

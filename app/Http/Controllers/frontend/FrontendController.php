@@ -28,40 +28,50 @@ class FrontendController extends Controller
   public function native_tools_language($slug = null)
   {
 
-      $tool = Tools::where('tool_slug', $slug)->firstOrFail();
-      if ($tool->parent_id !== 0) {
-          abort(404);
-      }
-      $viewName = 'frontend.emd_tool_pages.' . $tool->tool_slug;
-      $params = [
-        'meta_title' => $tool->meta_title,
-        'meta_description' => $tool->meta_description,
-        'content' => json_decode($tool->content_keys),
-        'language' => $tool->language,
-        'tool' => $tool
-      ];
+    $tool = Tools::where('tool_slug', $slug)->firstOrFail();
+    if ($tool->parent_id !== 0) {
+      abort(404);
+    }
+    $viewName = 'frontend.emd_tool_pages.' . $tool->tool_slug;
+    $params = [
+      'meta_title' => $tool->meta_title,
+      'meta_description' => $tool->meta_description,
+      'content' => json_decode($tool->content_keys),
+      'language' => $tool->language,
+      'tool' => $tool
+    ];
 
-      return view($viewName, $params);
+    return view($viewName, $params);
   }
 
 
   public function other_tools_language($lang, $slug)
 {
-    // Fetch the tool based on the slug and language
     $tool = Tools::with('parent')->where('tool_slug', $slug)->where('language', $lang)->firstOrFail();
-
-    // Check if the tool is a parent (parent_id is 0)
+    $params = [
+        'meta_title' => $tool->meta_title,
+        'meta_description' => $tool->meta_description,
+        'content' => json_decode($tool->content_keys),
+        'language' => $tool->language,
+        'tool' => $tool
+    ];
     if ($tool->parent_id === 0) {
-        // If the tool is a parent, abort with a 404 error
-        abort(404);
+        $viewName = 'frontend.emd_tool_pages.' . $tool->tool_slug;
+        return view($viewName, $params);
+    } else {
+        $parentTool = $tool->parent;
+        if ($parentTool) {
+            if ($parentTool->is_home == 1) {
+                return view('frontend.home', $params);
+            } else {
+                $viewName = 'frontend.emd_tool_pages.' . $parentTool->tool_slug;
+                return view($viewName, $params);
+            }
+        } else {
+
+            abort(404);
+        }
     }
-
-    // If the tool is a child, fetch the parent tool
-    $parentTool = $tool->parent;
-    $viewName = 'frontend.emd_tool_pages.' . $parentTool->tool_slug;
-
-    // Return the view with the tool and parentTool data
-    return view($viewName, compact('tool', 'parentTool'));
 }
 
 
