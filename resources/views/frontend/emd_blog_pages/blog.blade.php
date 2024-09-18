@@ -5,9 +5,9 @@
     <div class="bg-red py-5">
         <h1>blog page</h1>
         @foreach ($blogs as $item)
-        @dd($item);
+        {{-- @dd($item); --}}
             {{-- <h3>{{ $item->title }}</h3> --}}
-            <img src="{{asset()}}" alt="">
+            <img src="{{asset('storage/'.$item['images']['150x150'])}}" alt="">
             {{-- <a href="{{ route('single.blog', $item->slug) }}" class="text-white">Readmore</a> --}}
         @endforeach
     </div>
