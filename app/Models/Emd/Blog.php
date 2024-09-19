@@ -34,7 +34,7 @@ class Blog extends Model
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function media()
+    public function image()
     {
         return $this->belongsTo(Media::class, 'image_id');
     }
