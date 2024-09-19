@@ -10,9 +10,6 @@
                 <h3>Our Latest 👨‍💻 Blog's </h3>
             </div>
         </div>
-        <img src="{{asset('storage/'.$blogs[0]['images']['300x300'])}}" alt="ddd">
-
-        @dd($blogs[0]['images']['300x300'])
         <div class="blog-list-container d-flex">
             @foreach ($blogs as $index => $item)
                 @if ($index == 0)
