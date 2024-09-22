@@ -17,13 +17,11 @@
             <h1>{{ @$content->main_heading->value }}</h1>
             <p>To use Texty Audio simply add your topic in the input box with essay length and click on the &quot;Write Essay&quot; button.</p>
         </div>
-        <form action="#" method="POST">
+        <form action="#" id="TextToSpeech">
+            <input type="file" id="fileUpload" class="d-none" accept=".txt,.doc,.docx" />
             <div class="main_tool">
                 <div class="main_content">
                     <div class="tool_action">
-                        <div>
-                            <h3>Text to Speech</h3>
-                        </div>
                         <div class="clear">
                             <img class="clear-input cursor-pointer" src="{{ asset('assets/frontend/image/delete.svg') }}" alt="delete" />
                         </div>
@@ -33,16 +31,22 @@
                         </div>
                     </div>
                     <div class="functional_tool">
-                        <textarea class="input-content-div" name="essay_content" contenteditable="true" id="editableDiv" placeholder="What your text that ypu want to convert it?"></textarea>
-
-                        <input type="hidden" class="allowed_word" name="word_limit" value="500" />
+                        <textarea class="input-content-div" id="content" name="content" placeholder="What your text that you want to convert it?"></textarea>
+                        <div class="wordCount">
+                            <span class="wordCountSpan">0</span>
+                            <span>/</span>
+                            <span class="wordCountLimit">{{ @$content->word_limit->value }}</span>
+                        </div>
                     </div>
                     <div class="lower_tool_action">
+                        <div class="uploadData">
+                            <img src="{{ asset('assets/frontend/image/upload.svg') }}" alt="upload" />
+                            <span>Upload</span>
+                        </div>
                         <div class="type-selector">
-                            <label for="essay-type">Language</label>
                             <div class="custom-select fix-height">
                                 <div class="select-selected" id="typeSelectors">
-                                    <span>English</span>
+                                    <span data-lang="en" class="SelectedLanguage">English</span>
                                     <div class="g-1">
                                         <img src="{{ asset('assets/frontend/image/select_icon.svg') }}" alt="select_icon" />
                                         <img src="{{ asset('assets/frontend/image/arrows_down.svg') }}" alt="arrows" />
@@ -51,17 +55,18 @@
                                 <span class="d-none" id="typeSelected"></span>
                                 <input type="hidden" name="essay_type" id="typeSelectedInput" value="Basic" />
                                 <ul class="select-items" id="typeItem">
-                                    <li>English</li>
-                                    <li>Spanish</li>
-                                    <li>Greman</li>
-                                    <li>French</li>
+                                    <li data-lang="en">English</li>
+                                    <li data-lang="es">Spanish</li>
+                                    <li data-lang="de">German</li>
+                                    <li data-lang="fr">French</li>
+                                    <li data-lang="ja">Japanese</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-generate btn-11 d-flex-jc-ai-g" id="EssaySubmit">
+            <button type="submit" class="btn-generate btn-11 d-flex-jc-ai-g" id="SubmitBtn">
                 <span>Generate Voice</span>
             </button>
         </form>
@@ -272,5 +277,9 @@
             </div>
         </div>
     </section>
-    
+    <x-validation-model />
 @endsection
+
+@push('script')
+    <script src="{{ asset('assets/frontend/js/home.js') }}"></script>
+@endpush

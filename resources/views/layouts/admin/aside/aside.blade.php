@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
     <div class="app-brand demo">
-        <a href="{{ url('/') }}" class="app-brand-link">
+        <a href="{{ url('/') }}" target="blank" class="app-brand-link">
             <span class="app-brand-logo demo me-1"></span>
             <span class="app-brand-text demo menu-text fw-semibold ms-2">EMD</span>
         </a>

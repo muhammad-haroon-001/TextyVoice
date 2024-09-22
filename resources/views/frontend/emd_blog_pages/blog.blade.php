@@ -15,7 +15,7 @@
                 @if ($index == 0)
                     <div class="blog-left d-flex-column">
                         <div class="blog-image">
-                            <img src="{{asset('storage/'.$item['images']['300x300'])}}" alt="{{ $item['title'] }}">
+                            <img src="{{asset('storage/'.$item['images']['900x900'])}}" alt="{{ $item['title'] }}">
                         </div>
                         <div class="blog-info d-flex">
                             <div class="blog-trend">

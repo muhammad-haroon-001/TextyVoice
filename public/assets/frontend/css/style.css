@@ -429,7 +429,7 @@
 .main_tool {
     width: 100%;
     max-width: 920px;
-    height: 268px;
+    height: auto;
     border-radius: 20px;
     box-shadow: 0 3px 35px 3px var(--box-shadow);
     margin: 0 auto;
@@ -456,7 +456,16 @@
 }
 
 .functional_tool {
-    position: relative
+    position: relative;
+}
+.functional_tool .wordCount{
+    display: none;
+    position: absolute;
+    right: 1%;
+    bottom: 10px;
+}
+.functional_tool .wordCount span{
+    color: lightslategray;
 }
 
 .counter {
@@ -479,7 +488,7 @@
     border: 1px solid var(--border-color);
     background: var(--white-color);
     overflow-y: auto;
-    height: 96px;
+    height: 125px;
     width: 100%;
     font-family: "Inter";
     font-size: var(--font-size-16);
@@ -490,12 +499,14 @@
 .lower_tool_action {
     display: var(--display-flex);
     gap: 20px;
-    align-items: var(--align-items-center)
+    align-items: var(--align-items-center);
+    margin-top: 10px;
 }
 
 .lower_tool_action .type-selector {
     width: 100%;
-    max-width: 240px
+    max-width: 240px;
+    height: 40px;
 }
 
 .lower_tool_action .type-selector label, .extra_feature h3, .tool_action h3 {
@@ -504,7 +515,20 @@
     font-weight: var(--font-weight-500);
     line-height: var(--line-height-24)
 }
-
+.uploadData{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.uploadData img{
+    width: 20;
+    height: 20px;
+}
 .extra_feature h3 {
     position: relative;
     top: -10px
@@ -517,21 +541,6 @@
 .extra_feature .bottom-div {
     gap: 20px
 }
-
-.type-selector {
-    padding: 16px 0;
-    display: var(--display-flex);
-    flex-direction: column;
-    gap: 10px
-}
-
-.type-selector label {
-    color: var(--color-black);
-    font-size: var(--font-size-16);
-    font-weight: var(--font-weight-500);
-    line-height: var(--line-height-24)
-}
-
 .custom-select {
     position: relative
 }
@@ -982,7 +991,7 @@ input[type="checkbox"]:before {
 
 .how-container {
     gap: 2.5rem;
-    background-image: url(../images/work-step-bg.svg);
+    background-image: url(../image/work-step-bg.svg);
     background-position: right;
     background-repeat: no-repeat
 }
@@ -1026,7 +1035,8 @@ input[type="checkbox"]:before {
 }
 
 .blog-image img {
-    width: 100%
+    width: 100%;
+    height: 300px;
 }
 
 .blog-right {
@@ -4099,4 +4109,112 @@ div.blog-single-social>.share-icons img {
     .blog-item {
         flex: 1 1 48%
     }
+}
+
+
+
+/* Modal and Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}
+
+.Popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1001;
+    width: 300px;
+    text-align: center;
+    border: none;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.popup-header img {
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+}
+
+.popup-content img {
+    width: 100px;
+    height: 85px;
+    margin-bottom: 15px;
+}
+
+.popup-content span {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.popup-content p {
+    font-size: 14px;
+    color: #666;
+}
+
+
+#language {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--white-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--white-color);
+}
+
+#language img {
+    width: 10px;
+    height: 10px;
+}
+#language li img{
+    width: 20px;
+    height: 20px;
+}
+.language-switcher .language-dropdown {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: -5px;
+    background-color: white;
+    z-index: 100;
+    list-style: none;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--color-dark-gray);
+}
+.language-switcher:hover .language-dropdown {
+    display: block;
+}
+.language-dropdown li a{
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-dark-gray);
+}
+.language-dropdown li a:hover{
+    color: var(--color-dark-gray);
 }

@@ -1,88 +1,165 @@
-$(document).ready(() => {
-    const inputContentDiv = $(".input-content-div");
-    const wordCountDisplay = $(".counter .word_count");
-    const clearButton = $(".clear");
-    const essaySubmitButton = $("#EssaySubmit");
-    const errorDiv = $(".error");
-    const editableDiv = $("#editableDiv");
-    const allow_word = $(".allowed_word").val();
-    const updateButtonState = () => {
-        const textareaContent = inputContentDiv.val();
-        const wordCount = textareaContent
-            .trim()
-            .split(/\s+/)
-            .filter((word) => word.length > 0).length;
-        wordCountDisplay.text(wordCount);
-        if (wordCount === 0) {
-            setButtonState(!1, "not-allowed");
-            clearButton.hide();
-            resetInputStyles();
-            hideError();
-        } else if (wordCount > allow_word) {
-            showError(limit_exceed);
-        } else {
-            hideError();
-            setButtonState(!0, "pointer");
-            clearButton.show();
+$(document).ready(function () {
+    const wordLimit = $('.wordCountLimit').text();
+    const BASE_URL = window.location.origin;
+
+    const TextToSpeech = (e) => {
+        e.preventDefault();
+        const Content = $('#content').val();
+        const language = $('.SelectedLanguage').data('lang');
+        var count = getWordCount(Content);
+        if (count == 0) {
+            showModal('limit_exceed.svg', 'No Content', 'Content Required');
+            return;
         }
-    };
-    const setButtonState = (isEnabled, cursorStyle) => {
-        essaySubmitButton.prop("disabled", !isEnabled).css("cursor", cursorStyle);
-    };
-    const resetInputStyles = () => {
-        editableDiv.css("border", "1px solid rgb(229, 229, 229)");
-    };
-    const showError = (message) => {
-        setButtonState(!1, "not-allowed");
-        errorDiv.css("display", "flex");
-        clearButton.hide();
-        errorDiv.find("span").text(message);
-        editableDiv.css("border", "1px solid red");
-    };
-    const hideError = () => {
-        errorDiv.hide();
-        resetInputStyles();
-    };
-    clearButton.on("click", () => {
-        inputContentDiv.val("");
-        updateButtonState();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });        
+
+        const data = {
+            content: Content,
+            language: language,
+        };
+
+        $.ajax({
+            url: BASE_URL + '/TextToSpeech',
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                $('.clear').show();
+                $('.wordCount').css("display", "flex");
+                var error = $('.error');
+                $('#content').val(response.content);
+                var count = getWordCount(response.content);
+                $(".wordCountSpan").text(count);
+                $('#SubmitBtn').attr('disabled', false).css('cursor', 'pointer');
+
+                if (count > wordLimit) {
+                    $('#SubmitBtn').attr('disabled', true).css('cursor', 'not-allowed');
+                    error.css('display', 'flex');
+                    error.find('span').text("Word Limit Exceed");
+                }
+                hideModel();
+            },
+            error: function () {
+                showModal('invalid_file.svg', 'Invalid File', 'File Format Not Supported');
+            }
+        });
+
+    }
+    // language selector
+    $("#typeSelectors").click(function (e) {
+        e.stopPropagation();
+        $("#typeItem").slideToggle();
     });
-    $("#typeItem li").on("click", function () {
-        const selectedValue = $(this).text();
-        $("#typeSelectors").text("");
-        $("#typeSelectors").append(`
-    <span>${selectedValue}</span>
-    <div class="g-1">
-        <img src="assets/image/select_icon.svg" alt="select_icon">
-        <img src="assets/image/arrows_down.svg" alt="arrows">
-    </div>
-`);
-        $("#typeSelectedInput").val(selectedValue);
+    $("#typeItem li").click(function () {
+        const selectedLanguage = $(this).text();
+        const selectedLangCode = $(this).data('lang');
+        $(".SelectedLanguage").text(selectedLanguage).attr('data-lang', selectedLangCode);
+        $("#typeSelectedInput").val(selectedLanguage);
+        $("#typeItem").slideUp();
     });
-    $("#longItem li").on("click", function () {
-        const selectedValue = $(this).text();
-        $("#longSelectors").text("");
-        $("#longSelectors").append(`
-    <span>${selectedValue}</span>
-    <div class="g-1">
-        <img src="assets/image/select_icon.svg" alt="select_icon">
-        <img src="assets/image/arrows_down.svg" alt="arrows">
-    </div>
-`);
-        $("#longSelected").val(selectedValue);
+    $(document).click(function () {
+        $("#typeItem").slideUp();
     });
-    inputContentDiv.on("input", updateButtonState);
-    updateButtonState();
-    $(".dropDownIcon").click(function () {
-        const dropdownId = $(this).attr("id").split("_")[1];
-        const dropdownContent = $(`#show_dropDownIcon_${dropdownId}`);
-        const icon = $(`#icon_dropDownIcon_${dropdownId}`);
-        const questionDiv = $(`#dropDownIcon_${dropdownId}`);
-        $(".dropdown-content").not(dropdownContent).slideUp(200);
-        $(".drop-icon img").not(icon).removeClass("rotate-icon");
-        $(".question-div").not(questionDiv).removeClass("rounded-border");
-        dropdownContent.slideToggle(200);
-        icon.toggleClass("rotate-icon");
-        questionDiv.toggleClass("rounded-border");
+    // File upload logic
+    const allowedExtensions = ['txt', 'doc', 'docx'];
+    $(".uploadData").click(function () {
+        $("#fileUpload").click();
     });
+    $("#fileUpload").change(function () {
+        const file = this.files[0];
+        if (file) {
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+            if (allowedExtensions.includes(fileExtension)) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: BASE_URL + '/uploadFile',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('.clear').show();
+                        $('.wordCount').css("display", "flex");
+                        var error = $('.error');
+                        $('#content').val(response.content);
+                        var count = getWordCount(response.content);
+                        $(".wordCountSpan").text(count);
+                        $('#SubmitBtn').attr('disabled', false).css('cursor', 'pointer');
+
+                        if (count > wordLimit) {
+                            $('#SubmitBtn').attr('disabled', true).css('cursor', 'not-allowed');
+                            error.css('display', 'flex');
+                            error.find('span').text("Word Limit Exceed");
+                        }
+                        hideModel();
+                    },
+                    error: function () {
+                        showModal('invalid_file.svg', 'Invalid File', 'File Format Not Supported');
+                    }
+                });
+            } else {
+                showModal('invalid_file.svg', 'Invalid File', 'File Format Not Supported');
+            }
+        }
+    });
+    $("#TextToSpeech").on('submit', TextToSpeech);
+
+    $('.clear').click(function () {
+        $('#content').val('');
+        $('.wordCount').hide();
+        $('.error').hide();
+        $('.clear').hide();
+    });
+
+    $('#content').on('input', function () {
+        $('.wordCount').css("display", "flex");
+        $('.clear').show();
+        var count = getWordCount($(this).val());
+        $(".wordCountSpan").text(count);
+        $('#SubmitBtn').attr('disabled', false).css('cursor', 'pointer');
+        $('.error').hide();
+        if (count == 0) {
+            $('.error').hide();
+            $('.clear').hide();
+            $('.wordCount').hide();
+        }
+        if (count > wordLimit) {
+            $('.error').css('display', 'flex');
+            $('.error').find('span').text("Word Limit Exceed");
+            $('#SubmitBtn').attr('disabled', true).css('cursor', 'not-allowed');
+        }
+    });
+
+    const showModal = (image, title, content) => {
+        $('.overlay').fadeIn();
+        $('.Popup').fadeIn();
+        var selector = $('.popup-content ');
+        const source = BASE_URL + "/assets/frontend/image/" + image;
+        selector.find('img').attr('src', source);
+        selector.find('span').text(title);
+        selector.find('p').text(content);
+    }
+
+    function getWordCount(content) {
+        const wordCount = content.length > 0 ? content.split(/\s+/).length : 0;
+        return wordCount;
+    }
 });
+
+const hideModel = () => {
+    $('.overlay').fadeOut();
+    $('.Popup').fadeOut();
+}
