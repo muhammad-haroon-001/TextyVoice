@@ -20,34 +20,24 @@
                 <img src="{{ asset('assets/frontend/image/language_drop.svg') }}" alt="language">
                 <ul class="language-dropdown">
                     <li data-lang="en">
-                        <a href="#">
-                            <img src="{{ asset('assets/frontend/image/en.svg') }}" alt="en">
-                            <span>English</span>
-                        </a>
+                        <img src="{{ asset('assets/frontend/image/en.svg') }}" alt="en">
+                        <span>English</span>
                     </li>
                     <li data-lang="es">
-                        <a href="#">
-                            <img src="{{ asset('assets/frontend/image/es.svg') }}" alt="es">
-                            <span>Spanish</span>
-                        </a>
+                        <img src="{{ asset('assets/frontend/image/es.svg') }}" alt="es">
+                        <span>Spanish</span>
                     </li>
                     <li data-lang="de">
-                        <a href="#">
-                            <img src="{{ asset('assets/frontend/image/de.svg') }}" alt="de">
-                            <span>German</span>
-                        </a>
+                        <img src="{{ asset('assets/frontend/image/de.svg') }}" alt="de">
+                        <span>German</span>
                     </li>
                     <li data-lang="ja">
-                        <a href="#">
-                            <img src="{{ asset('assets/frontend/image/ja.svg') }}" alt="ja">
-                            <span>Japanese</span>
-                        </a>
+                        <img src="{{ asset('assets/frontend/image/ja.svg') }}" alt="ja">
+                        <span>Japanese</span>
                     </li>
                     <li data-lang="fr">
-                        <a href="#">
-                            <img src="{{ asset('assets/frontend/image/fr.svg') }}" alt="fr">
-                            <span>French</span>
-                        </a>
+                        <img src="{{ asset('assets/frontend/image/fr.svg') }}" alt="fr">
+                        <span>French</span>
                     </li>
                 </ul>
             </div>

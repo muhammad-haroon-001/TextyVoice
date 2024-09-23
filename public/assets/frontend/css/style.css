@@ -4207,7 +4207,7 @@ div.blog-single-social>.share-icons img {
 .language-switcher:hover .language-dropdown {
     display: block;
 }
-.language-dropdown li a{
+.language-dropdown li{
     padding: 5px;
     cursor: pointer;
     display: flex;
@@ -4215,6 +4215,6 @@ div.blog-single-social>.share-icons img {
     gap: 10px;
     color: var(--color-dark-gray);
 }
-.language-dropdown li a:hover{
+.language-dropdown li :hover{
     color: var(--color-dark-gray);
 }
