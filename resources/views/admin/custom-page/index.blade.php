@@ -8,6 +8,11 @@
             <div class="white-bg">
                 <div class="add-custom-page-heading">
                     <h3>EMD Custom Pages</h3>
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
                 <table id="custom_page_table" class="table">
 
