@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <form id="form-element" action="#" method="POST">
+        <form id="form-element" action="{{ route('contact.store') }}" method="POST">
             <div class="contact-form d-flex-column">
                 <div class="messages">
                     <div class="alert alert-danger" id="fail"><strong class="fail_error"></strong><span
