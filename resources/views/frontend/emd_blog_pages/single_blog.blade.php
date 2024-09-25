@@ -1,4 +1,5 @@
 @extends('layouts.frontend.main')
+@section('title', $blog->title)
 @section('content')
     <div class="container">
         <div class="blog_section d-flex-jc-ai-g d-flex-column">
