@@ -125,5 +125,26 @@
                 </li>
             </ul>
         </li>
+        @if (auth()->user()->user_type == 0)
+            
+        <li class="menu-item">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
+                <div>Contact Messages</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('contact.index') }}" class="menu-link">
+                        <div>List</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('Emd.contact.user.trash') }}" class="menu-link">
+                        <div>Trash</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endif
     </ul>
 </aside>
