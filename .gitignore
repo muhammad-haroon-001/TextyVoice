@@ -46,3 +46,5 @@ package-lock.log
 /.vscode
 /vendor
 /resources/views/frontend/emd_tool_pages/speech-to-text-backup.blade.php
+/public/assets/download-audio
+/public/assets/upload-audio
