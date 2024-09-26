@@ -59,9 +59,11 @@ class ToolsController extends Controller
     ]);
 
 
-
+    $checkTool = Tools::where('tool_slug', $validatedData['slug'])->first();
+    if ($checkTool) {
+      return redirect()->route('tools.index')->with('error', 'Tool Already Exists');
+    }
     info('Data:', $validatedData);
-
     $contentData = [];
     $totalItems = count($validatedData['contentKey']);
     for ($index = 0; $index < $totalItems; $index++) {
@@ -86,7 +88,7 @@ class ToolsController extends Controller
       $filePath = $directoryPath . $validatedData['slug'] . '.blade.php';
       info('Attempting to create file at: ' . $filePath);
       if (!FacadesFile::exists($filePath)) {
-        $result = FacadesFile::put($filePath, 
+        $result = FacadesFile::put($filePath,
         "@extends('layouts.frontend.main')\n" .
         "@section('content')\n" .
         "@endsection\n"

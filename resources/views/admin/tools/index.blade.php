@@ -14,6 +14,11 @@
                     <div class="tools">
                         <div class="add-tool-heading">
                             <h3>All Tools:</h3>
+                            @if(session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                         </div>
                         <table id="tools_table" class="table table-responsive">
                             <thead>
