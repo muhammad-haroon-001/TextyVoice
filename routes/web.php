@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dashboard\ContactController;
 use App\Http\Controllers\frontend\CustomArrayController;
 use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ require __DIR__.'/admin.php';
 require __DIR__.'/custom.php';
 require __DIR__.'/custom_pages.php';
 
-
+route::resource('contact',ContactController::class);
 //blog page
 Route::get('blog', [CustomArrayController::class, 'main_blog_page'])->name('blog');
 Route::get('blog/{slug}', [CustomArrayController::class, 'single_blog_page'])->name('single.blog');

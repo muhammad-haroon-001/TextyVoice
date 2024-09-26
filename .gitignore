@@ -45,11 +45,3 @@ package-lock.log
 /.idea
 /.vscode
 /vendor
-
-# Ignore everything inside emd_tool_pages except .gitkeep
-/resources/views/frontend/emd_tool_pages/*
-!/resources/views/frontend/emd_tool_pages/.gitkeep
-
-# Ignore everything inside emd_custom_pages except .gitkeep
-/resources/views/frontend/emd_custom_pages/*
-!/resources/views/frontend/emd_custom_pages/.gitkeep

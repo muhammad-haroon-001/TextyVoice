@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\dashboard\BlogController;
+use App\Http\Controllers\dashboard\ContactController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\SettingKeyController;
 use App\Http\Controllers\dashboard\UserController;
@@ -34,4 +35,6 @@ Route::prefix('emd')->middleware('auth')->group(function () {
   Route::resource('users', UserController::class);
   Route::get('trash-user', [UserController::class,'TrashUser'])->name('Emd.user.trash');
   Route::put('restore-user/{id}', [UserController::class,'restoreUser'])->name('Emd.users.restore');
+  Route::get('trash-contact-user', [ContactController::class,'TrashUser'])->name('Emd.contact.user.trash');
+  Route::put('restore-contact-user/{id}', [ContactController::class,'restoreUser'])->name('Emd.contact.users.restore');
 })->middleware('auth');

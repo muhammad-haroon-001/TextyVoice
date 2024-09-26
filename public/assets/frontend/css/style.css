@@ -297,9 +297,9 @@
 }
 
 .toogle_header {
-    display: var(--display-flex)
+    display: var(--display-flex);
+    gap:15px;
 }
-
 .navbar-logo p, .mobile-logo p {
     color: var(--white-color);
     font-size: var(--font-size-18);
@@ -4171,7 +4171,7 @@ div.blog-single-social>.share-icons img {
 }
 
 
-#language {
+#language  , #language-mobile{
     position: relative;
     cursor: pointer;
     display: flex;
@@ -4182,12 +4182,15 @@ div.blog-single-social>.share-icons img {
     border-radius: 5px;
     color: var(--white-color);
 }
+#language-mobile{
+    padding: 0px 5px;
+}
 
-#language img {
+#language img , #language-mobile img{ 
     width: 10px;
     height: 10px;
 }
-#language li img{
+#language li img , #language-mobile li img{
     width: 20px;
     height: 20px;
 }
@@ -4207,7 +4210,7 @@ div.blog-single-social>.share-icons img {
 .language-switcher:hover .language-dropdown {
     display: block;
 }
-.language-dropdown li a{
+.language-dropdown li{
     padding: 5px;
     cursor: pointer;
     display: flex;
@@ -4215,6 +4218,6 @@ div.blog-single-social>.share-icons img {
     gap: 10px;
     color: var(--color-dark-gray);
 }
-.language-dropdown li a:hover{
+.language-dropdown li :hover{
     color: var(--color-dark-gray);
 }
