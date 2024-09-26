@@ -45,3 +45,4 @@ package-lock.log
 /.idea
 /.vscode
 /vendor
+/resources/views/frontend/emd_tool_pages/speech-to-text-backup.blade.php
