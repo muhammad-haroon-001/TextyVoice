@@ -50,11 +50,15 @@ class CustomPageController extends Controller
       'contentType' => 'array'
     ]);
 
+    $checkPage = CustomPage::where('page_key', $validatedData['key'])->first();
+    if ($checkPage) {
+      return redirect()->route('custom-page.index')->with('error', 'Page Already Exists');
+    }
+
+
     $contentData = [];
-    $totalItems = count($validatedData['contentKey']);
-    for ($index = 0; $index < $totalItems; $index++) {
-      if (isset($validatedData['contentValue'][$index]) && isset($validatedData['contentType'][$index])) {
-        $key = $validatedData['contentKey'][$index];
+    foreach ($validatedData['contentKey'] as $index => $key) {
+      if (isset($validatedData['contentValue'][$index], $validatedData['contentType'][$index])) {
         $contentData[$key] = [
           'type' => $validatedData['contentType'][$index],
           'value' => $validatedData['contentValue'][$index],
@@ -63,6 +67,7 @@ class CustomPageController extends Controller
     }
     $jsonContent = json_encode($contentData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
     $isSitemap = $validatedData['sitemap'] ?? 0;
+
     $directoryPath = resource_path('views/frontend/emd_custom_pages/');
     if (!FacadesFile::exists($directoryPath)) {
       FacadesFile::makeDirectory($directoryPath, 0755, true);
@@ -70,14 +75,10 @@ class CustomPageController extends Controller
     } else {
       info('Directory already exists: ' . $directoryPath);
     }
+
     $filePath = $directoryPath . $validatedData['view'] . '.blade.php';
-    info('Attempting to create file at: ' . $filePath);
     if (!FacadesFile::exists($filePath)) {
-      $result = FacadesFile::put($filePath, 
-        "@extends('layouts.frontend.main')\n" .
-        "@section('content')\n" .
-        "@endsection\n"
-    );
+      $result = FacadesFile::put($filePath, "@extends('layouts.frontend.main')\n@section('content')\n@endsection\n");
       info('File creation result: ' . ($result !== false ? 'Success' : 'Failed'));
     } else {
       info('File already exists: ' . $filePath);
@@ -97,28 +98,30 @@ class CustomPageController extends Controller
 
       if ($customPage) {
         $routeDefinition = "Route::get('{$validatedData['slug']}', 'custom_page_display')->name('EmdCustomPage.{$validatedData['slug']}');";
-
         $routeFilePath = base_path('routes/custom_pages.php');
         $routeFileContent = FacadesFile::get($routeFilePath);
-        $insertPosition = strpos($routeFileContent, "});");
-        if ($insertPosition !== false) {
-          $updatedRouteFileContent = substr_replace($routeFileContent, "    " . $routeDefinition . "\n", $insertPosition, 0);
-          FacadesFile::put($routeFilePath, $updatedRouteFileContent);
+        if (!str_contains($routeFileContent, $routeDefinition)) {
+          $insertPosition = strpos($routeFileContent, "});");
+          if ($insertPosition !== false) {
+            $updatedRouteFileContent = substr_replace($routeFileContent, "    " . $routeDefinition . "\n", $insertPosition, 0);
+            FacadesFile::put($routeFilePath, $updatedRouteFileContent);
+          } else {
+            info("Route group not found in custom_pages.php.");
+          }
         } else {
-          info("Route group not found in custom_pages.php.");
+          info("Route for {$validatedData['slug']} already exists.");
         }
 
-
-        return redirect()->route('custom-page.index');
-      } else {
-        return redirect()->back();
+        return redirect()->route('custom-page.index')->with('success', 'Custom page created successfully.');
       }
 
+      return redirect()->back()->with('error', 'Failed to create custom page.');
     } catch (\Exception $e) {
       info($e->getMessage());
+      return redirect()->back()->with('error', 'An error occurred while creating the custom page.');
     }
-
   }
+
 
   /**
    * Display the specified resource.
@@ -193,7 +196,7 @@ class CustomPageController extends Controller
   public function trashPages(Request $request)
   {
     $trashPage = CustomPage::onlyTrashed()->get();
-    
+
   }
 
 
