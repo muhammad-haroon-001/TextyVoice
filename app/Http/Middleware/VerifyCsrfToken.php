@@ -16,5 +16,7 @@ class VerifyCsrfToken extends Middleware
         '/TextToSpeech',
         '/SpeechToText',
         '/language-switch',
+        '/download-audio',
+        '/upload-audio',
     ];
 }
