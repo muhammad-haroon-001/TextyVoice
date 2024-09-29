@@ -289,3 +289,9 @@ audio {
         font-size: 0.875rem;
     }
 }
+
+@media (max-width: 780px) {
+    .navbar{
+        display: none !important;
+    }
+}
