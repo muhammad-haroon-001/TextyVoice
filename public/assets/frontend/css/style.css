@@ -3666,7 +3666,7 @@ div.blog-single-social>.share-icons img {
     }
 
     .navbar {
-        display: none
+        display: none !important;
     }
 
     .tool-div {
