@@ -176,7 +176,7 @@
                     <div class="col-6 text-center pt-5">
                         <div class="message"></div>
                         <h4>Upload JSON Content</h4>
-                        <form action="{{ route('Emd.tools.upload', $page->id) }}" method="POST"
+                        <form action="{{ route('Emd.custom-page.upload', $page->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="content" id="content" class="form-control" required>

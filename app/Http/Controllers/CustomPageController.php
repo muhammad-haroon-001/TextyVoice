@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\File as FacadesFile;
 
 class CustomPageController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
   public function index()
   {
     $customPages = CustomPage::select('id', 'name', 'slug', 'page_key', 'blade_view', 'meta_title', 'meta_description')->get();
@@ -22,9 +19,6 @@ class CustomPageController extends Controller
     return view("admin.custom-page.index", $params);
   }
 
-  /**
-   * Show the form for creating a new resource.
-   */
   public function create()
   {
 
@@ -32,9 +26,6 @@ class CustomPageController extends Controller
 
   }
 
-  /**
-   * Store a newly created resource in storage.
-   */
   public function store(Request $request)
   {
     $validatedData = $request->validate([
@@ -122,27 +113,17 @@ class CustomPageController extends Controller
     }
   }
 
-
-  /**
-   * Display the specified resource.
-   */
   public function show(CustomPage $customPage)
   {
     //
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   */
   public function edit(CustomPage $customPage)
   {
     $page = $customPage;
     return view("admin.custom-page.edit", compact('page'));
   }
 
-  /**
-   * Update the specified resource in storage.
-   */
   public function update(Request $request, CustomPage $customPage)
   {
     $validatedData = $request->validate([
@@ -183,9 +164,6 @@ class CustomPageController extends Controller
     return redirect()->route('custom-page.index');
   }
 
-  /**
-   * Remove the specified resource from storage.
-   */
   public function destroy(CustomPage $customPage)
   {
     $customPage->delete();
@@ -208,5 +186,23 @@ class CustomPageController extends Controller
     file_put_contents($tempFile, $content);
     $filename = $page->slug . '.json';
     return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
+  }
+  public function upload_content_file(Request $request, $id)
+  {
+    try {
+      $tool = CustomPage::findOrFail($id);
+      $request->validate([
+        'content' => 'required|file|mimes:json',
+      ]);
+      $fileContent = file_get_contents($request->file('content')->getRealPath());
+
+      $tool->update([
+        'content_keys' => $fileContent,
+      ]);
+
+      return redirect()->back()->with('success', 'Tool content updated successfully');
+    } catch (\Throwable $th) {
+      info($th->getMessage());
+    }
   }
 }
