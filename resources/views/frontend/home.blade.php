@@ -71,15 +71,15 @@
             </button>
         </form>
         <div class="disclaimer">
-            <p>{{ @$content->disclaimer->value }}</p>
+            <p>{!! @$content->disclaimer->value !!}</p>
         </div>
     </section>
 
     <section class="container">
         <div class="work-container d-flex">
             <div class="left-works d-flex-g d-flex-column">
-                <h2>How to use Texty Audio?</h2>
-                <p>Texty Audio make it easy for you to write a effective and informative essay in seconds. The whole writing process takes a few seconds to complete. All you need to do is provide your topic or prompt of your essay.</p>
+                <h2>{{ @$content->how_to_use->value }}</h2>
+                <p>{{ @$content->how_to_use_description->value }}</p>
             </div>
             <div class="right-works d-flex">
                 <div class="work-steps-container d-flex-column">
@@ -87,15 +87,24 @@
                         <ul class="how-container d-flex-column d-flex-jce-aie-g">
                             <li class="step-1 d-flex-jc-ai-g">
                                 <img src="{{ asset('assets/frontend/image/step-1.svg') }}" alt="step-1" class="step-image" />
-                                <p><span>Essay Topic: </span> Type or paste the essay topic you need to write about. It can be anything. It can be a short descriptive topic or a long narrative topic.</p>
+                                <p>
+                                    <span>{{ @$content->step_1->value }} </span>
+                                    {{ @$content->step_1_description->value }}
+                                </p>
                             </li>
                             <li class="step-1 d-flex-jc-ai-g">
                                 <img src="{{ asset('assets/frontend/image/step-2.svg') }}" alt="step-2" class="step-image" />
-                                <p><span>Type of Essay: </span> Choose the type of essay, such as argumentative, expository, narrative, or descriptive, to clarify our essay generator of your need.</p>
+                                <p>
+                                    <span>{{ @$content->step_2->value }}</span> 
+                                    {{ @$content->step_2_description->value }}
+                                </p>
                             </li>
                             <li class="step-1 d-flex-jc-ai-g">
                                 <img src="{{ asset('assets/frontend/image/step-3.svg') }}" alt="step-3" class="step-image" />
-                                <p><span>Essay Length: </span> Select your essay length to define how many words you want to generate according to your requirements.</p>
+                                <p>
+                                    <span>{{ @$content->step_3->value }}</span>
+                                    {{ @$content->step_3_description->value }}
+                                </p>
                             </li>
                         </ul>
                     </div>
@@ -107,8 +116,8 @@
     <section class="bg_color">
         <div class="container">
             <div class="feature-top d-flex-jc-ai-g d-flex-column" id="features">
-                <h3>Features of our Essay Maker ✍️</h3>
-                <p class="text-center">Our free essay maker has many useful unique features that set it apart from other essay writers and make it an excellent choice for students.</p>
+                <h3>{{ @$content->features_heading->value }}</h3>
+                <p class="text-center">{{ @$content->features_description->value }}</p>
                 <div class="card_flex">
                     <div class="home-features">
                         <div class="feature_card">
@@ -117,8 +126,8 @@
                                     <img src="{{ asset('assets/frontend/image/home-fature1.svg') }}" alt="feature" />
                                 </div>
                                 <div class="card_content">
-                                    <h3>Free for Students</h3>
-                                    <p>Our essay maker is free for students to help them enhance their learning and writing experience to write competitive essays in their academic career.</p>
+                                    <h3>{{ @$content->feature_step_1->value }}</h3>
+                                    <p>{{ @$content->feature_step_1_description->value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -130,8 +139,8 @@
                                     <img src="{{ asset('assets/frontend/image/home-fature2.svg') }}" alt="feature" />
                                 </div>
                                 <div class="card_content">
-                                    <h3>No Sign-up Required</h3>
-                                    <p>Texty Audio will not ask you for any Sign up or registration to write an essay, you just need to add your topic and start generating essays online.</p>
+                                    <h3>{{ @$content->feature_step_2->value }}</h3>
+                                    <p>{{ @$content->feature_step_2_description->value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +152,8 @@
                                     <img src="{{ asset('assets/frontend/image/home-fature3.svg') }}" alt="feature" />
                                 </div>
                                 <div class="card_content">
-                                    <h3>AI for Essay Writing</h3>
-                                    <p>Texty Audio trained with advanced state-of-the-art technology to write unique, well-structured, and coherent essays with no plagiarism issues.</p>
+                                    <h3>{{ @$content->feature_step_3->value }}</h3>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -156,34 +165,8 @@
                                     <img src="{{ asset('assets/frontend/image/home-fature4.svg') }}" alt="feature" />
                                 </div>
                                 <div class="card_content">
-                                    <h3>Bypass AI</h3>
-                                    <p>Our essay typer is programmed with a special feature called &quot;Bypass AI&quot;. Using this feature will help you remove AI detection and provide value to human readers.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="home-features">
-                        <div class="feature_card">
-                            <div class="card_body">
-                                <div class="card_image">
-                                    <img src="{{ asset('assets/frontend/image/home-fature5.svg') }}" alt="feature" />
-                                </div>
-                                <div class="card_content">
-                                    <h3>Provides References</h3>
-                                    <p>Our essay typer offers an option that you can select to get references and citations at the end of the essay with the provided information.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="home-features">
-                        <div class="feature_card">
-                            <div class="card_body">
-                                <div class="card_image">
-                                    <img src="{{ asset('assets/frontend/image/home-fature6.svg') }}" alt="feature" />
-                                </div>
-                                <div class="card_content">
-                                    <h3>Types of Essays</h3>
-                                    <p>This feature can help you generate different types of essays such as argumentative, expository, narrative, descriptive, etc., so that you can choose the type according to your requirements.</p>
+                                    <h3>{{ @$content->feature_step_4->value }}</h3>
+                                    <p>{{ @$content->feature_step_4_description->value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -199,75 +182,71 @@
                 <img class="why-us-img" src="{{ asset('assets/frontend/image/why-us.svg') }}" alt="why-us" />
             </div>
             <div class="left-works d-flex-g d-flex-column">
-                <h2>Why our Essay Generator?</h2>
-                <p>
-                    Our essay generator uses advanced machine learning algorithms, especially deep learning models to understand and generate essays the way humans write.
-                    <br />
-                    <br />
-                </p>
+                <h2>{{ @$content->why_us_heading->value }}</h2>
+                <p>{!! @$content->why_us_description->value !!}</p>
             </div>
         </div>
     </section>
 
     <section class="container">
         <div class="faq_section d-flex-jc-ai-g d-flex-column">
-            <h3>Frequently Asked Questions</h3>
+            <h3></h3>
         </div>
         <div class="faq-container d-flex-column d-flex-jc-ai-g">
             <div class="question-container d-flex-column">
                 <div class="question-div dropDownIcon cursor-pointer d-flex-column" id="dropDownIcon_1">
                     <div class="question-top d-flex">
                         <div class="question-title" id="title_dropDownIcon_1">
-                            <h3>Is it okay to use AI for essays? <span> </span></h3>
+                            <h3>{{ @$content->faq_question_1->value }}</h3>
                         </div>
                         <div class="drop-icon d-flex-jc-ai">
                             <img id="icon_dropDownIcon_1" src="{{ asset('assets/frontend/image/drop-icon.svg') }}" alt="drop-icon" />
                         </div>
                     </div>
                     <div class="dropdown-content d-none" id="show_dropDownIcon_1">
-                        <p>YES! It is perfectly okay to use AI for essays as long as you don&#039;t violate any guidelines. If there are no restrictions on using AI for essay writing, you can use it without any problems.</p>
+                        <p>{!! @$content->faq_answer_1->value !!}</p>
                     </div>
                 </div>
 
                 <div class="question-div dropDownIcon cursor-pointer d-flex-column" id="dropDownIcon_2">
                     <div class="question-top d-flex">
                         <div class="question-title" id="title_dropDownIcon_2">
-                            <h3>Is there an AI that writes essays? <span> </span></h3>
+                            <h3>{{ @$content->faq_question_2->value }}</h3>
                         </div>
                         <div class="drop-icon d-flex-jc-ai">
                             <img id="icon_dropDownIcon_2" src="{{ asset('assets/frontend/image/drop-icon.svg') }}" alt="drop-icon" />
                         </div>
                     </div>
                     <div class="dropdown-content d-none" id="show_dropDownIcon_2">
-                        <p>Texty Audio uses modern NLP algorithms to provide valuable information to humans and turn it into an AI that writes essays for you in seconds.</p>
+                        <p>{!! @$content->faq_answer_2->value !!}</p>
                     </div>
                 </div>
 
                 <div class="question-div dropDownIcon cursor-pointer d-flex-column" id="dropDownIcon_3">
                     <div class="question-top d-flex">
                         <div class="question-title" id="title_dropDownIcon_3">
-                            <h3>How do you write an AI essay without getting caught? <span> </span></h3>
+                            <h3>{{ @$content->faq_question_3->value }}</h3>
                         </div>
                         <div class="drop-icon d-flex-jc-ai">
                             <img id="icon_dropDownIcon_3" src="{{ asset('assets/frontend/image/drop-icon.svg') }}" alt="drop-icon" />
                         </div>
                     </div>
                     <div class="dropdown-content d-none" id="show_dropDownIcon_3">
-                        <p>To avoid having your essay getting caught as AI, be sure to add some content of your own and also use our “Bypass AI” feature to make the AI undetectable.</p>
+                        <p>{!! @$content->faq_answer_3->value !!}</p>
                     </div>
                 </div>
 
                 <div class="question-div dropDownIcon cursor-pointer d-flex-column" id="dropDownIcon_4">
                     <div class="question-top d-flex">
                         <div class="question-title" id="title_dropDownIcon_4">
-                            <h3>How students can write essays online for free? <span> </span></h3>
+                            <h3>{{ @$content->faq_question_4->value }}</h3>
                         </div>
                         <div class="drop-icon d-flex-jc-ai">
                             <img id="icon_dropDownIcon_4" src="{{ asset('assets/frontend/image/drop-icon.svg') }}" alt="drop-icon" />
                         </div>
                     </div>
                     <div class="dropdown-content d-none" id="show_dropDownIcon_4">
-                        <p>Our essay maker is 100% free for students to help them improve their writing skills more effectively and to engage them more deeply with their subjects.</p>
+                        <p>{!! @$content->faq_answer_4->value !!}</p>
                     </div>
                 </div>
             </div>
