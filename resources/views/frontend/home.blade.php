@@ -15,7 +15,7 @@
     <section class="tool_bg">
         <div class="tool-top d-flex-column d-flex-jc-ai-g">
             <h1>{{ @$content->main_heading->value }}</h1>
-            <p>To use Texty Audio simply add your topic in the input box with essay length and click on the &quot;Write Essay&quot; button.</p>
+            <p>{{ @$content->main_content->value }}</p>
         </div>
         <form action="#" id="TextToSpeech">
             <input type="file" id="fileUpload" class="d-none" accept=".txt,.doc,.docx" />
@@ -41,7 +41,7 @@
                     <div class="lower_tool_action">
                         <div class="uploadData">
                             <img src="{{ asset('assets/frontend/image/upload.svg') }}" alt="upload" />
-                            <span>Upload</span>
+                            <span>{{ @$content->upload_btn->value }}</span>
                         </div>
                         <div class="type-selector">
                             <div class="custom-select fix-height">
@@ -67,15 +67,11 @@
                 </div>
             </div>
             <button type="submit" class="btn-generate btn-11 d-flex-jc-ai-g" id="SubmitBtn">
-                <span>Generate Voice</span>
+                <span>{{ @$content->button_text->value }}</span>
             </button>
         </form>
         <div class="disclaimer">
-            <p>
-                Generating essays on harmful, dangerous or illegal topics not allowed, we tried our best to prevent these topics,if you find any essay topic that is generating any of these types of content, email us at
-                <a class="mail" href="#">aiessaywriter.com</a> b/w
-                <a class="contact" href="contact-us">contact us</a>
-            </p>
+            <p>{{ @$content->disclaimer->value }}</p>
         </div>
     </section>
 

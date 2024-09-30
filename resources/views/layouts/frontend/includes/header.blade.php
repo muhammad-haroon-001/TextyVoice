@@ -6,15 +6,15 @@
                     <img src="{{ asset('assets/frontend/image/logo.svg') }}" alt="logo" />
                 </div>
                 <div>
-                    <p class="logo-text nav-list-active">Texty Voice</p>
+                    <p class="logo-text nav-list-active">{{ config('setting_key.logo_text') }}</p>
                 </div>
             </a>
         </div>
         <div class="nav-list d-flex-jc-ai">
-            <a href="{{ route('home') }}" class="active">Text To Speech</a>
-            <a href="{{ route('tool', 'speech-to-text') }}">Speech To Text</a>
-            <a href="{{ route('blog') }}" class="">Blogs</a>
-            <a href="{{ route('EmdCustomPage.contact-us') }}" class="">Contact</a>
+            <a href="{{ route('home') }}" class="active">{{ config('setting_key.menu_text_to_speech') }}</a>
+            <a href="{{ route('tool', 'speech-to-text') }}">{{ config('setting_key.menu_speech_to_text') }}</a>
+            <a href="{{ route('blog') }}" class="">{{ config('setting_key.menu_blog') }}</a>
+            <a href="{{ route('EmdCustomPage.contact-us') }}" class="">{{ config('setting_key.menu_contact') }}</a>
             @if (request()->routeIs('home') || request()->routeIs('tool') || request()->routeIs('tool.lang'))
             <div id="language" class="language-switcher">
                 <span class="name" id="selected-language">English</span>
@@ -53,7 +53,7 @@
                         <img src="{{ asset('assets/frontend/image/logo.svg') }}" alt="logo" />
                     </div>
                     <div>
-                        <p class="logo-text nav-list-active">Texty Voice</p>
+                        <p class="logo-text nav-list-active">{{ config('setting_key.logo_text') }}</p>
                     </div>
                 </a>
             </div>
@@ -90,10 +90,10 @@
             </div>
         </div>
         <div class="mobile-dropdown">
-            <a href="{{ route('home') }}">Text To Speech</a>
-            <a href="{{ route('tool', 'speech-to-text') }}">Speech To Text</a>
-            <a href="{{ route('blog') }}" class="">Blogs</a>
-            <a href="{{ route('EmdCustomPage.contact-us') }}" class="">Contact</a>
+            <a href="{{ route('home') }}">{{ config('setting_key.menu_text_to_speech') }}</a>
+            <a href="{{ route('tool', 'speech-to-text') }}">{{ config('setting_key.menu_speech_to_text') }}</a>
+            <a href="{{ route('blog') }}" class="">{{ config('setting_key.menu_blog') }}</a>
+            <a href="{{ route('EmdCustomPage.contact-us') }}" class="">{{ config('setting_key.menu_contact') }}</a>
         </div>
     </div>
 </nav>

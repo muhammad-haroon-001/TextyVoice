@@ -4,7 +4,7 @@
     <div class="container">
         <div class="blog_section d-flex-jc-ai-g d-flex-column">
             <div class="top_badge">
-                <span>NEW BLOG</span>
+                <span>{{ config('setting_key.blog_badge') }}</span>
             </div>
             <div class="top_heading">
                 <h3>{{ $blog->title }}</h3>
@@ -27,72 +27,15 @@
             <div class="d-flex-column single-blog-content">
                 <p>{!! $blog->description !!}</p>
             </div>
-
             <div class="blog-single-social d-flex">
                 <div class="share-text">
-                    <p>Like what you read? Share with a friend</p>
+                    <p>{{ config('setting_key.single_blog_share_text') }}</p>
                 </div>
                 <div class="share-icons g-1">
                     <img src="{{ asset('assets/frontend/image/facebook.svg') }}" alt="facebook">
                     <img src="{{ asset('assets/frontend/image/twitter-blog.svg') }}" alt="twitter">
                     <img src="{{ asset('assets/frontend/image/linkedin-blog.svg') }}" alt="linkedin">
                     <img src="{{ asset('assets/frontend/image/pinterest-blog.svg') }}" alt="pinterest">
-                </div>
-            </div>
-
-        </div>
-        <div class="blog_section d-flex-jc-ai-g d-flex-column">
-            <div class="top_heading">
-                <h3>🔥 Trending Posts </h3>
-            </div>
-        </div>
-        <div class="blog-list-container-new d-flex">
-            <div class="blog-left d-flex-column">
-                <div class="blog-image">
-                    <img src="{{ asset('assets/frontend/image/blog.jpg') }}" alt="blog-1">
-                </div>
-                <div class="blog-info d-flex">
-                    <div class="blog-trend">
-                        <p>trending</p>
-                    </div>
-                    <div class="blog-date">
-                        <p>17 September 24</p>
-                    </div>
-                </div>
-                <div class="blog-title">
-                    <h2>sfsdklfasd;fml</h2>
-                </div>
-                <div class="blog-detail d-flex">
-                    <a class="blog-read-more cursor-pointer d-flex-10"
-                        href="#">
-                        <p>read more</p>
-                        <img src="{{ asset('assets/frontend/image/blog-top-read.svg') }}"
-                            alt="read-more">
-                    </a>
-                </div>
-            </div>
-            <div class="blog-left d-flex-column">
-                <div class="blog-image">
-                    <img src="{{ asset('assets/frontend/image/blog.jpg') }}" alt="blog-1">
-                </div>
-                <div class="blog-info d-flex">
-                    <div class="blog-trend">
-                        <p>trending</p>
-                    </div>
-                    <div class="blog-date">
-                        <p>17 September 24</p>
-                    </div>
-                </div>
-                <div class="blog-title">
-                    <h2>sfsdklfasd;fml</h2>
-                </div>
-                <div class="blog-detail d-flex">
-                    <a class="blog-read-more cursor-pointer d-flex-10"
-                        href="#">
-                        <p>read more</p>
-                        <img src="{{ asset('assets/frontend/image/blog-top-read.svg') }}"
-                            alt="read-more">
-                    </a>
                 </div>
             </div>
         </div>

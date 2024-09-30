@@ -1,13 +1,13 @@
 @extends('layouts.frontend.main')
-@section('title', 'Blog')
+@section('title', config('setting_key.blog_page_title'))
 @section('content')
     <section class="container">
         <div class="blog_section d-flex-jc-ai-g d-flex-column">
             <div class="top_badge">
-                <span>OUR BLOG</span>
+                <span>{{ config('setting_key.blog_badge') }}</span>
             </div>
             <div class="top_heading">
-                <h3>Our Latest 👨‍💻 Blog's </h3>
+                <h3>{{ config('setting_key.blog_main_heading') }}</h3>
             </div>
         </div>
         <div class="blog-list-container d-flex">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="blog-detail d-flex">
                             <a class="blog-read-more cursor-pointer d-flex-10" href="{{ route('single.blog', $item['slug']) }}">
-                                <p>read more</p>
+                                <p>{{ config('setting_key.blog_read_more') }}</p>
                                 <img src="{{ asset('assets/frontend/image/read-more.svg') }}" alt="read-more">
                             </a>
                         </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="blog-detail d-flex">
                                     <a href="{{ route('single.blog', $innerItem['slug']) }}" class="blog-read-more cursor-pointer d-flex-10">
-                                        <p>read more</p>
+                                        <p>{{ config('setting_key.blog_read_more') }}</p>
                                         <img src="{{ asset('assets/frontend/image/blog-top-read.svg') }}" alt="read-more">
                                     </a>
                                 </div>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="blog-footer d-flex">
                             <a class="blog-read-more cursor-pointer d-flex-10" href="{{ route('single.blog', $finalItem['slug']) }}">
-                                <p>Read More</p>
+                                <p>{{ config('setting_key.blog_read_more') }}</p>
                                 <img src="{{ asset('assets/frontend/image/blog-top-read.svg') }}" alt="read-more">
                             </a>
                         </div>
