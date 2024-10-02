@@ -200,6 +200,7 @@ class CustomPageController extends Controller
   }
 
 
+  
   public function download_content_file($id)
   {
     $page = CustomPage::findOrFail($id);
@@ -208,5 +209,23 @@ class CustomPageController extends Controller
     file_put_contents($tempFile, $content);
     $filename = $page->slug . '.json';
     return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
+  }
+  public function upload_content_file(Request $request, $id)
+  {
+    try {
+      $tool = CustomPage::findOrFail($id);
+      $request->validate([
+        'content' => 'required|file|mimes:json',
+      ]);
+      $fileContent = file_get_contents($request->file('content')->getRealPath());
+
+      $tool->update([
+        'content_keys' => $fileContent,
+      ]);
+
+      return redirect()->back()->with('success', 'Tool content updated successfully');
+    } catch (\Throwable $th) {
+      info($th->getMessage());
+    }
   }
 }

@@ -18,18 +18,24 @@
                                     <!-- Tool Name -->
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="toolName" class="form-label">Tool Name</label>
+                                            <label for="toolName" class="form-label">Tool Name<span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" name="name" class="form-control" id="toolName"
                                                 placeholder="Tool Name">
+                                                @error('name')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
 
                                     <!-- Tool Slug -->
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="toolSlug" class="form-label">Tool Slug</label>
+                                            <label for="toolSlug" class="form-label">Tool Slug<span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" name="slug" class="form-control" id="toolSlug"
                                                 placeholder="Tool Slug">
+                                                @error('slug')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
 
@@ -56,6 +62,9 @@
                                                 <span class="space-count">(Extra Spaces: <span
                                                         class="char-extraspaces-num">0</span>)</span>
                                             </div>
+                                            @error('meta-title')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -72,13 +81,16 @@
                                                 <span class="space-count">(Extra Spaces: <span
                                                         class="desc-char-extraspaces-num">0</span>)</span>
                                             </div>
+                                            @error('meta-description')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
                                     <!-- Language -->
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="language" class="form-label">Language</label>
+                                            <label for="language" class="form-label">Language<span class="text-danger fs-6 ms-1">*</span></label>
                                             <select class="form-select" name="tool-lang" aria-label="Languages" required>
                                                 <option disabled selected>Languages</option>
                                                 @foreach ($languageData['languages'] as $lang)
@@ -86,7 +98,10 @@
                                                         ({{ $lang['code'] }})
                                                     </option>
                                                 @endforeach
-                                            </select>
+                                            </select>           
+                                            @error('tool-lang')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 

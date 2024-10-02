@@ -14,31 +14,43 @@
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
-                                <label for="pageName" class="form-label">Page Name</label>
+                                <label for="pageName" class="form-label">Page Name<span class="text-danger fs-6 ms-1">*</span></label>
                                 <input type="text" name="name" class="form-control" id="pageName"
                                     placeholder="Page Name">
+                                    @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6">
                             <div class="mb-3">
-                                <label for="bladeFile" class="form-label">Blade File</label>
+                                <label for="bladeFile" class="form-label">Blade File<span class="text-danger fs-6 ms-1">*</span></label>
                                 <input type="text" name="view" class="form-control" id="bladeFile"
                                     placeholder="Blade File Name">
+                                    @error('view')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="mb-3">
-                                <label for="pageSlug" class="form-label">Page Slug</label>
+                                <label for="pageSlug" class="form-label">Page Slug<span class="text-danger fs-6 ms-1">*</span></label>
                                 <input type="text" name="slug" class="form-control js-custom-page-slug" id="pageSlug"
                                     placeholder="Page Slug">
+                                    @error('slug')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="mb-3">
-                                <label for="pageKey" class="form-label">Page Key</label>
+                                <label for="pageKey" class="form-label">Page Key<span class="text-danger fs-6 ms-1">*</span></label>
                                 <input type="text" name="key" class="form-control js-page-key" id="pageKey"
                                     placeholder="Page Key">
+                                    @error('key')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -46,6 +58,9 @@
                                 <label for="metaTitle" class="form-label">Meta Title</label>
                                 <input type="text" name="meta_title" class="form-control" id="metaTitle"
                                     placeholder="Meta Title">
+                                    @error('meta_title')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -53,6 +68,9 @@
                                 <label for="metaDescription" class="form-label">Meta Description</label>
                                 <textarea type="text" name="meta_description" class="form-control" id="metaDescription"
                                     placeholder="Meta Description"></textarea>
+                                    @error('meta_description')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-12">

@@ -17,30 +17,42 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="pageName" class="form-label">Page Name</label>
+                                            <label for="pageName" class="form-label">Page Name<span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" name="name" value="{{ $page->name }}"
                                                 class="form-control" id="pageName" placeholder="Page Name">
+                                                @error('name')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="bladeFile" class="form-label">Blade File</label>
+                                            <label for="bladeFile" class="form-label">Blade File<span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" name="view" value="{{ $page->blade_view }}" readonly
-                                                class="form-control" id="bladeFile" placeholder="Blade File Name">
+                                                class="form-control bg-light" id="bladeFile" placeholder="Blade File Name">
+                                                @error('view')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="pageSlug" class="form-label">Page Slug</label>
+                                            <label for="pageSlug" class="form-label">Page Slug<span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" name="slug" value="{{ $page->slug }}"
-                                                class="form-control" id="pageSlug" placeholder="Page Slug">
+                                                class="form-control bg-light" id="pageSlug" placeholder="Page Slug" readonly>
+                                                @error('slug')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="pageKey" class="form-label">Page Key</label>
+                                            <label for="pageKey" class="form-label">Page Key<span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" value="{{ $page->page_key }}" name="key"
-                                                class="form-control" placeholder="Page Key" id="pageKey">
+                                                class="form-control bg-light" placeholder="Page Key" id="pageKey" readonly>
+                                                @error('key')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
@@ -151,8 +163,6 @@
 
                                 </span>
                         </div>
-                        
-
                         <div class="col-12">
                             <div class="mt-5">
                                 <button type="submit" class="btn btn-primary ms-auto d-flex waves-effect waves-light">Update</button>
@@ -176,7 +186,7 @@
                     <div class="col-6 text-center pt-5">
                         <div class="message"></div>
                         <h4>Upload JSON Content</h4>
-                        <form action="{{ route('Emd.tools.upload', $page->id) }}" method="POST"
+                        <form action="{{ route('Emd.custom-page.upload', $page->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="content" id="content" class="form-control" required>

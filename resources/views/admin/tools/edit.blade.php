@@ -24,9 +24,12 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
-                                            <label for="toolName" class="form-label">Tool Name</label>
+                                            <label for="toolName" class="form-label">Tool Name <span class="text-danger fs-6 ms-1">*</span></label>
                                             <input type="text" name="name" value="{{ $tool->tool_name }}"
                                                 class="form-control" id="toolName" placeholder="Tool Name">
+                                                @error('name')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                     </div>
 
@@ -35,7 +38,10 @@
                                         <div class="mb-3">
                                             <label for="toolSlug" class="form-label">Tool Slug</label>
                                             <input type="text" name="slug" value="{{ $tool->tool_slug }}"
-                                                class="form-control" id="toolSlug" placeholder="Tool Slug">
+                                                class="form-control bg-light" id="toolSlug" placeholder="Tool Slug" readonly>
+                                            @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -77,7 +83,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="mb-3">
                                             <label for="language" class="form-label">Language</label>
-                                            <input type="text" class="form-control" id="language" name="tool-lang"
+                                            <input type="text" class="form-control bg-light" id="language" name="tool-lang"
                                                 readonly value="{{ $tool->language }}">
                                         </div>
                                     </div>
@@ -88,7 +94,7 @@
                                             <label for="parentTool" class="form-label">Parent Tool</label>
                                             <input type="text" readonly name="tool-parent"
                                                 value="@if ($tool->parent_id != 0) {{ $tool->parent->tool_name }} @endif Parent Tool"
-                                                class="form-control" id="parentTool">
+                                                class="form-control bg-light" id="parentTool" readonly>
                                         </div>
                                     </div>
 

@@ -31,11 +31,11 @@ class UserController extends Controller
             'user_type' => ['required', 'in:1,2,3,4'],
         ]);
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'hash' => Str::random(8),
+            'hash' => substr(str_shuffle(Str::random(6) .'0123456789'), 0, 15),
             'user_type' => $request->user_type,
         ]);
         return redirect()->route('users.index')->with('success', 'User created successfully.');

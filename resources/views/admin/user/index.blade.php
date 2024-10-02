@@ -40,6 +40,13 @@
                 },
                 {
                     data: null,
+                    title: 'Hash',
+                    render: function(data, type, row) {
+                        return data.hash;
+                    }
+                },
+                {
+                    data: null,
                     title: 'Role',
                     render: function(data, type, row) {
                         let userTypeMap = {

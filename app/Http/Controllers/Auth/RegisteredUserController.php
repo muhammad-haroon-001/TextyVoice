@@ -16,9 +16,10 @@ use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
-    public function create(): View
+    public function create()
     {
-        return view('auth.register');
+        return redirect()->route('home');
+        // return view('auth.register');
     }
     public function store(Request $request): RedirectResponse
     {

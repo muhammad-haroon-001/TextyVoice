@@ -18,9 +18,6 @@
                 <div>
                     <input type="password" name="password" placeholder="Password" value="{{ old('password') }}" required id="password">
                 </div>
-                <div class="message">
-                    <a href="{{ route('register') }}">don't have an account</a>
-                </div>
                 <div class="mt-5">
                     <button type="submit" class="btn btn-primary waves-effect waves-light">Sign in</button>
                 </div>
