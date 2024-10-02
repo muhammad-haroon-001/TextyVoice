@@ -29,7 +29,7 @@ class FrontendController extends Controller
   {
 
     $tool = Tools::where('tool_slug', $slug)->firstOrFail();
-    if ($tool->parent_id !== 0) {
+    if ($tool->parent_id != 0) {
       abort(404);
     }
     $viewName = 'frontend.emd_tool_pages.' . $tool->tool_slug;
