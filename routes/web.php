@@ -4,6 +4,7 @@ use App\Http\Controllers\dashboard\ContactController;
 use App\Http\Controllers\frontend\CustomArrayController;
 use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,11 @@ require __DIR__.'/admin.php';
 require __DIR__.'/custom_pages.php';
 require __DIR__.'/custom.php';
 
-route::resource('contact',ContactController::class);
+Route::get('artisan' , function(){
+  Artisan::call('optimize:clear');
+  return "Cache cleared!";
+});
+Route::resource('contact',ContactController::class);
 //blog page
 Route::get('blog', [CustomArrayController::class, 'main_blog_page'])->name('blog');
 Route::get('blog/{slug}', [CustomArrayController::class, 'single_blog_page'])->name('single.blog');
