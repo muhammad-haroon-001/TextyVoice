@@ -1,3 +1,6 @@
+@php
+    $contactCount = App\Models\Emd\Contact::where('read', 0)->count();
+@endphp
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
     <div class="app-brand demo" style="padding: 0px;">
         <a href="{{ url('/') }}" target="_blank" class="app-brand-link">
@@ -126,11 +129,12 @@
             </ul>
         </li>
         @if (auth()->user()->user_type == 0)
-            
         <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
-                <div>Contact Messages</div>
+                <div>Contact
+                    <sup class="badge bg-primary rounded-pill custom-badge">{{ $contactCount }}</sup>
+                </div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">

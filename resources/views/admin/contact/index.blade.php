@@ -35,7 +35,7 @@
                     data: null,
                     title: 'Email',
                     render: function(data, type, row) {
-                        return data.email;
+                        return '<a href=" /contact/' + data.id + '">' + data.email + '</a>';
                     }
                 },
                 {
@@ -43,6 +43,23 @@
                     title: 'Message',
                     render: function(data, type, row) {
                         return data.message;
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Status',
+                    render: function(data, type, row) {
+                        let userTypeMap = {
+                            0: 'read',
+                            1: 'unread',
+                        };
+                        let badgeClassMap = {
+                            0: 'badge-primary',
+                            1: 'badge-danger',
+                        };
+                        let userType = userTypeMap[data.read];
+                        let badgeClass = badgeClassMap[data.read];
+                        return `<span class="badge ${badgeClass}">${userType}</span>`;
                     }
                 },
                 {
