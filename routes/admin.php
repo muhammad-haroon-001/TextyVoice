@@ -22,9 +22,9 @@ Route::prefix('emd')->middleware('auth')->group(function () {
   Route::get('download-content/{id}', [ToolsController::class, 'download_content_file'])->name('Emd.tools.download');
   Route::post('upload-content/{id}', [ToolsController::class, 'upload_content_file'])->name('Emd.tools.upload');
   Route::resource('custom-page', CustomPageController::class);
+  Route::resource('custom-page', CustomPageController::class);
   Route::get('download-custom-page/{id}', [CustomPageController::class,'download_content_file'])->name('Emd.custom-page.download');
   Route::post('custom-page-upload-content/{id}', [CustomPageController::class, 'upload_content_file'])->name('Emd.custom-page.upload');
-
   //blog
   Route::resource('blog', BlogController::class);
   Route::get('trash-blog', [BlogController::class,'trash_blog'])->name('Emd.blog.trash');

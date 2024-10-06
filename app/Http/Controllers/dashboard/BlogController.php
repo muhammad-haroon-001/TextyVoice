@@ -37,8 +37,8 @@ class BlogController extends Controller
       $request->validate([
           'title' => 'required|string|max:255',
           'slug' => 'required|string|max:255|unique:blogs',
-          'meta_title' => 'required|string|max:255',
-          'meta_description' => 'required|string|max:255',
+          'meta_title' => 'nullable|string|max:255',
+          'meta_description' => 'nullable|string|max:255',
           'language' => 'required|string|max:10',
           'description' => 'string',
           'parent_id' => 'required|integer',

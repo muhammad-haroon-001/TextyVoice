@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CustomArrayController extends Controller
 {
     public function main_blog_page(){
-        $blogs = Blog::with('image')->where('status', 1)->get();
+        $blogs = Blog::has('image')->where('status', 1)->get();
         $blogsArray = $blogs->toArray();
 
         foreach ($blogs as $index => $blog) {
@@ -25,7 +25,9 @@ class CustomArrayController extends Controller
 
         $blog = Blog::where('slug',$slug)->first();
         $params = [
-            'blog' => $blog
+            'blog' => $blog,
+            'meta_title' => $blog->meta_title,
+            'meta_description' => $blog->meta_description,
         ];
         return view('frontend.emd_blog_pages.single_blog',$params);
     }

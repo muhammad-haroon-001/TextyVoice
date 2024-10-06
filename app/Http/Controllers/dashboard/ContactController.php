@@ -41,7 +41,10 @@ class ContactController extends Controller
 
     public function show(Contact $contact)
     {
-        //
+        if($contact->read == 0){
+            $contact->update(['read' => 1]);
+        }
+        return view('admin.contact.view', compact('contact'));
     }
 
     public function edit(Contact $contact)

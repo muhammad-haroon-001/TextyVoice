@@ -97,6 +97,14 @@ textarea{
     background-color: #007bff;
     color: white;
 }
+.badge-primary {
+    background-color: #9055fd;
+    color: white;
+}
+.badge-danger {
+    background-color: #ff4c51;
+    color: white;
+}
 
 .badge-support {
     background-color: #17a2b8;

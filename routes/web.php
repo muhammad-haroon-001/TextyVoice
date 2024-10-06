@@ -22,11 +22,13 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/custom.php';
 require __DIR__.'/custom_pages.php';
-Route::get('clear-cache' , function(){
+require __DIR__.'/custom.php';
+
+Route::get('artisan' , function(){
   Artisan::call('optimize:clear');
   return "Cache cleared!";
 });
-route::resource('contact',ContactController::class);
+Route::resource('contact',ContactController::class);
 //blog page
 Route::get('blog', [CustomArrayController::class, 'main_blog_page'])->name('blog');
 Route::get('blog/{slug}', [CustomArrayController::class, 'single_blog_page'])->name('single.blog');

@@ -178,6 +178,7 @@ class CustomPageController extends Controller
   }
 
 
+  
   public function download_content_file($id)
   {
     $page = CustomPage::findOrFail($id);

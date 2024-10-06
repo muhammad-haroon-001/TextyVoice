@@ -48,7 +48,7 @@
                 data: null,
                 title: 'Name/Slug',
                 render: function(data, type, row) {
-                    return data.tool_name + ' <br> ' + data.tool_slug;
+                    return '<a href=" /emd/edit-tool/' + data.tool_slug + '">' + data.tool_name + '</a> <br> ' + data.tool_slug;
                 }
             },
             {
@@ -73,7 +73,6 @@
                 render: function(data, type, row) {
                     var deleteUrl = `/emd/delete-tool/${data.id}`;
                     return `
-               <a href="/emd/edit-tool/${data.tool_slug}" class="btn btn-sm btn-primary">Edit</a>
                <form action="${deleteUrl}" method="POST" style="display:inline;">
                        <input type="hidden" name="_method" value="DELETE">
                        @csrf
