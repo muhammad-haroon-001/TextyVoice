@@ -9,9 +9,9 @@
                 <div class="add-custom-page-heading">
                     <h3>EMD Blogs</h3>
                 </div>
-                <table id="custom_page_table" class="table">
-
-                </table>
+                <div class="table-responsive">
+                    <table id="custom_page_table" class="table"></table>
+                </div>
             </div>
         </div>
     </section>
