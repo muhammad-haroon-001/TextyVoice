@@ -20,15 +20,18 @@
                                 </div>
                             @endif
                         </div>
-                        <table id="tools_table" class="table table-responsive">
-                            <thead>
-                                <tr>
+                        
+                        <div class="table-responsive">
+                            <table id="tools_table" class="table table-responsive">
+                                <thead>
+                                    <tr>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
