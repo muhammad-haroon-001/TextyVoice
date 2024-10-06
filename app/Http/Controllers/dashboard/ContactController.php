@@ -5,6 +5,9 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Emd\Contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -27,6 +30,12 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
         Contact::create($validate);
+        try {
+            Mail::to($validate['email'])->send(new ContactMail($validate));
+        } catch (\Exception $e) {
+            Log::error('Mailer error:', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Mail could not be sent.');
+        }
         return redirect()->back()->with('success', 'Contact submitted successfully.');
     }
 
